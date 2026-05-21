@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Wiki — Capstone Presentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:'Noto Sans KR', sans-serif;
+    background:#0f0f23;
+    color:#e0e0e0;
+    overflow-x:hidden;
+  }
+
+  /* ---- Slide Container ---- */
+  .slides { width:100%; }
+  .slide {
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:60px 40px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  /* ---- Background Effects ---- */
+  .slide::before {
+    content:'';
+    position:absolute;
+    top:-50%; left:-50%;
+    width:200%; height:200%;
+    background:radial-gradient(circle at 30% 50%, rgba(99,102,241,0.08), transparent 50%),
+               radial-gradient(circle at 70% 50%, rgba(139,92,246,0.06), transparent 50%);
+    pointer-events:none;
+  }
+  .slide.dark { background:#0a0a1a; }
+  .slide.gradient {
+    background:linear-gradient(135deg, #0f0f23 0%, #1a1040 50%, #0f0f23 100%);
+  }
+  .slide.accent {
+    background:linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+  }
+
+  /* ---- Slide Number ---- */
+  .slide-num {
+    position:absolute;
+    bottom:30px; right:40px;
+    font-size:14px;
+    color:rgba(255,255,255,0.2);
+    font-weight:300;
+    letter-spacing:2px;
+  }
+
+  /* ---- Typography ---- */
+  h1 {
+    font-size:clamp(2.5rem, 6vw, 5rem);
+    font-weight:900;
+    background:linear-gradient(135deg, #818cf8, #c084fc, #f472b6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    text-align:center;
+    line-height:1.2;
+    margin-bottom:20px;
+  }
+  h2 {
+    font-size:clamp(1.8rem, 4vw, 3rem);
+    font-weight:700;
+    color:#c4b5fd;
+    text-align:center;
+    margin-bottom:40px;
+    position:relative;
+  }
+  h2::after {
+    content:'';
+    display:block;
+    width:60px; height:3px;
+    background:linear-gradient(90deg, #818cf8, #c084fc);
+    margin:16px auto 0;
+    border-radius:2px;
+  }
+  h3 {
+    font-size:1.3rem;
+    font-weight:600;
+    color:#a78bfa;
+    margin-bottom:12px;
+  }
+  p, li { font-size:1.05rem; line-height:1.7; color:#cbd5e1; }
+  .subtitle {
+    font-size:clamp(1rem, 2vw, 1.3rem);
+    color:#94a3b8;
+    text-align:center;
+    font-weight:300;
+    margin-bottom:40px;
+  }
+  .highlight {
+    color:#a78bfa;
+    font-weight:500;
+  }
+
+  /* ---- Content Layout ---- */
+  .content {
+    max-width:1100px;
+    width:100%;
+    position:relative;
+    z-index:1;
+  }
+  .content.wide { max-width:1300px; }
+  .content.narrow { max-width:800px; }
+
+  /* ---- Grid ---- */
+  .grid {
+    display:grid;
+    gap:20px;
+  }
+  .grid-2 { grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); }
+  .grid-3 { grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); }
+  .grid-4 { grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); }
+
+  /* ---- Cards ---- */
+  .card {
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:16px;
+    padding:28px 24px;
+    transition:all 0.3s ease;
+    backdrop-filter:blur(10px);
+  }
+  .card:hover {
+    border-color:rgba(129,140,248,0.3);
+    transform:translateY(-4px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+  }
+  .card .icon {
+    font-size:2rem;
+    margin-bottom:12px;
+  }
+  .card h4 {
+    font-size:1.1rem;
+    font-weight:600;
+    color:#e0e0e0;
+    margin-bottom:8px;
+  }
+  .card p {
+    font-size:0.9rem;
+    color:#94a3b8;
+    line-height:1.5;
+  }
+
+  /* ---- Architecture Diagram ---- */
+  .arch {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    margin:40px 0;
+  }
+  .arch-row {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .arch-box {
+    background:rgba(99,102,241,0.1);
+    border:1px solid rgba(99,102,241,0.3);
+    border-radius:12px;
+    padding:16px 24px;
+    text-align:center;
+    min-width:140px;
+  }
+  .arch-box.high {
+    background:rgba(139,92,246,0.15);
+    border-color:rgba(139,92,246,0.4);
+  }
+  .arch-box.lit {
+    background:rgba(244,114,182,0.1);
+    border-color:rgba(244,114,182,0.3);
+  }
+  .arch-box .label {
+    font-size:0.8rem;
+    color:#94a3b8;
+    margin-bottom:4px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  .arch-box .name {
+    font-size:1rem;
+    font-weight:600;
+    color:#e0e0e0;
+  }
+  .arch-arrow { color:#6366f1; font-size:1.5rem; }
+  .arch-arrow-down { color:#6366f1; font-size:1.2rem; display:block; margin:4px 0; }
+
+  /* ---- Flow Diagram ---- */
+  .flow {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0;
+    flex-wrap:wrap;
+    margin:30px 0;
+  }
+  .flow-step {
+    background:rgba(99,102,241,0.08);
+    border:1px solid rgba(99,102,241,0.2);
+    border-radius:10px;
+    padding:16px 20px;
+    text-align:center;
+    min-width:140px;
+    flex:1;
+  }
+  .flow-step .step-num {
+    font-size:0.75rem;
+    color:#818cf8;
+    font-weight:700;
+    margin-bottom:4px;
+    letter-spacing:1px;
+  }
+  .flow-step .step-name {
+    font-size:1rem;
+    font-weight:600;
+    color:#e0e0e0;
+  }
+  .flow-step .step-desc {
+    font-size:0.8rem;
+    color:#64748b;
+    margin-top:4px;
+  }
+  .flow-connector {
+    color:#6366f1;
+    font-size:1.5rem;
+    padding:0 8px;
+  }
+
+  /* ---- Tree View ---- */
+  .tree { margin:20px 0; font-family:'Courier New', monospace; font-size:0.9rem; line-height:1.8; }
+  .tree-line { color:#64748b; }
+  .tree-dir { color:#818cf8; font-weight:600; }
+  .tree-file { color:#94a3b8; }
+  .tree-comment { color:#6b7280; font-style:italic; }
+
+  /* ---- Timeline ---- */
+  .timeline { position:relative; padding-left:30px; margin:30px 0; }
+  .timeline::before {
+    content:'';
+    position:absolute;
+    left:10px; top:0; bottom:0;
+    width:2px;
+    background:linear-gradient(180deg, #818cf8, #c084fc, transparent);
+  }
+  .tl-item { position:relative; margin-bottom:28px; }
+  .tl-item::before {
+    content:'';
+    position:absolute;
+    left:-24px; top:6px;
+    width:10px; height:10px;
+    border-radius:50%;
+    background:#818cf8;
+    border:2px solid #1e1b4b;
+  }
+  .tl-item .tl-date { font-size:0.8rem; color:#818cf8; font-weight:600; margin-bottom:4px; }
+  .tl-item .tl-title { font-size:1.1rem; font-weight:600; color:#e0e0e0; margin-bottom:4px; }
+  .tl-item .tl-desc { font-size:0.9rem; color:#94a3b8; }
+
+  /* ---- Tag ---- */
+  .tag {
+    display:inline-block;
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:0.75rem;
+    font-weight:600;
+    letter-spacing:0.5px;
+    margin:2px;
+  }
+  .tag-blue { background:rgba(99,102,241,0.15); color:#818cf8; }
+  .tag-purple { background:rgba(139,92,246,0.15); color:#a78bfa; }
+  .tag-pink { background:rgba(244,114,182,0.15); color:#f472b6; }
+  .tag-green { background:rgba(52,211,153,0.15); color:#34d399; }
+  .tag-yellow { background:rgba(251,191,36,0.15); color:#fbbf24; }
+  .tag-white { background:rgba(255,255,255,0.06); color:#94a3b8; }
+
+  /* ---- Stats ---- */
+  .stats { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; margin:30px 0; }
+  .stat { text-align:center; }
+  .stat .num {
+    font-size:2.5rem;
+    font-weight:900;
+    background:linear-gradient(135deg, #818cf8, #c084fc);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .stat .label { font-size:0.85rem; color:#64748b; margin-top:4px; }
+
+  /* ---- Tech Stack ---- */
+  .tech-list { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:20px 0; }
+  .tech-item {
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px;
+    padding:12px 20px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.9rem;
+    color:#cbd5e1;
+  }
+  .tech-item .tech-icon { font-size:1.3rem; }
+
+  /* ---- CTA Button ---- */
+  .btn {
+    display:inline-block;
+    padding:14px 36px;
+    border-radius:12px;
+    font-size:1rem;
+    font-weight:600;
+    text-decoration:none;
+    transition:all 0.3s ease;
+    margin:8px;
+    cursor:pointer;
+    border:none;
+  }
+  .btn-primary {
+    background:linear-gradient(135deg, #6366f1, #8b5cf6);
+    color:white;
+  }
+  .btn-primary:hover {
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(99,102,241,0.3);
+  }
+  .btn-outline {
+    background:transparent;
+    border:1px solid rgba(129,140,248,0.4);
+    color:#818cf8;
+  }
+  .btn-outline:hover {
+    background:rgba(99,102,241,0.1);
+    border-color:#818cf8;
+  }
+
+  /* ---- Features List ---- */
+  .feature-list { list-style:none; margin:20px 0; }
+  .feature-list li {
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .feature-list li:last-child { border:none; }
+  .feature-list .check {
+    color:#34d399;
+    font-size:1.2rem;
+    flex-shrink:0;
+    margin-top:2px;
+  }
+
+  /* ---- Footer ---- */
+  .footer {
+    text-align:center;
+    padding:40px;
+    color:#475569;
+    font-size:0.85rem;
+    border-top:1px solid rgba(255,255,255,0.04);
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width:768px) {
+    .slide { padding:40px 20px; }
+    .flow { flex-direction:column; gap:8px; }
+    .flow-connector { transform:rotate(90deg); padding:4px 0; }
+    .stats { gap:20px; }
+    .stat .num { font-size:2rem; }
+  }
+
+  /* ---- Animations ---- */
+  @keyframes fadeInUp {
+    from { opacity:0; transform:translateY(30px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  .slide .content > * { animation:fadeInUp 0.6s ease forwards; }
+  .slide .content > *:nth-child(2) { animation-delay:0.1s; }
+  .slide .content > *:nth-child(3) { animation-delay:0.2s; }
+  .slide .content > *:nth-child(4) { animation-delay:0.3s; }
+  .slide .content > *:nth-child(5) { animation-delay:0.4s; }
+
+  /* ---- Progress Bar ---- */
+  .progress {
+    position:fixed;
+    top:0; left:0; right:0;
+    height:3px;
+    z-index:100;
+    background:rgba(255,255,255,0.05);
+  }
+  .progress-bar {
+    height:100%;
+    background:linear-gradient(90deg, #6366f1, #c084fc, #f472b6);
+    width:0%;
+    transition:width 0.3s ease;
+  }
+
+  /* ---- Scroll Indicator ---- */
+  .scroll-indicator {
+    position:absolute;
+    bottom:60px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    color:#475569;
+    font-size:0.75rem;
+    letter-spacing:2px;
+    animation:bounce 2s infinite;
+  }
+  .scroll-indicator .arrow { font-size:1.5rem; }
+  @keyframes bounce {
+    0%,100% { transform:translateX(-50%) translateY(0); }
+    50% { transform:translateX(-50%) translateY(8px); }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+<div class="slides">
+
+  <!-- ======================== SLIDE 1: TITLE ======================== -->
+  <section class="slide gradient" id="title">
+    <div class="content narrow" style="text-align:center;">
+      <div style="font-size:4rem; margin-bottom:20px;">📋</div>
+      <h1>Job Wiki</h1>
+      <p class="subtitle" style="margin-bottom:12px;">
+        공공 채용공고 자동 수집 · 분석 · 추천 파이프라인
+      </p>
+      <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:30px;">
+        <span class="tag tag-blue">Python</span>
+        <span class="tag tag-purple">Flask</span>
+        <span class="tag tag-pink">LLM</span>
+        <span class="tag tag-green">GitHub Actions</span>
+        <span class="tag tag-yellow">Obsidian</span>
+      </div>
+      <p style="color:#64748b; font-size:0.9rem;">
+        <span style="color:#475569;">Capstone Project · 2026</span>
+      </p>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <span class="arrow">↓</span>
+    </div>
+    <div class="slide-num">01 / 10</div>
+  </section>
+
+  <!-- ======================== SLIDE 2: PROBLEM & GOAL ======================== -->
+  <section class="slide dark" id="problem">
+    <div class="content narrow">
+      <h2>Problem & Goal</h2>
+      <div class="grid grid-2" style="margin-top:20px;">
+        <div class="card" style="border-left:3px solid #f87171;">
+          <div class="icon">⚠️</div>
+          <h4>Problem</h4>
+          <p>
+            공공 채용공고는 기관별로 분산 게시되고, 비정형 데이터라서
+            직접 비교/분석이 어렵다. 취업자가 조건에 맞는 공고를
+            찾기 위해 수많은 사이트를 일일이 확인해야 하는 비효율이 발생한다.
+          </p>
+        </div>
+        <div class="card" style="border-left:3px solid #34d399;">
+          <div class="icon">🎯</div>
+          <h4>Goal</h4>
+          <p>
+            채용공고를 자동 수집하고,<br>
+            <span class="highlight">Facet 기반 위키</span>로 구조화한 뒤,<br>
+            LLM + Python 점수화로<br>
+            개인 맞춤형 추천까지 One-Stop으로 제공한다.
+          </p>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num">50+</div><div class="label">수집 기관</div></div>
+        <div class="stat"><div class="num">8</div><div class="label">Facet 축</div></div>
+        <div class="stat"><div class="num">3</div><div class="label">Stage 파이프라인</div></div>
+        <div class="stat"><div class="num">→</div><div class="label">실시간</div></div>
+      </div>
+    </div>
+    <div class="slide-num">02 / 10</div>
+  </section>
+
+  <!-- ======================== SLIDE 3: SYSTEM ARCHITECTURE ======================== -->
+  <section class="slide gradient" id="arch">
+    <div class="content wide" style="text-align:center;">
+      <h2>System Architecture</h2>
+
+      <div class="arch">
+        <div class="arch-row">
+          <div class="arch-box high">
+            <div class="label">Trigger</div>
+            <div class="name">GitHub Actions<br><span style="font-size:0.8rem; color:#94a3b8;">harvest.yml</span></div>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-box">
+            <div class="label">Collect</div>
+            <div class="name">job_raw<br><span style="font-size:0.8rem; color:#94a3b8;">수집 & 저장</span></div>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-box high">
+            <div class="label">Process</div>
+            <div class="name">job_core<br><span style="font-size:0.8rem; color:#94a3b8;">Wiki 생성</span></div>
+          </div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-box lit">
+            <div class="label">Serve</div>
+            <div class="name">job_career<br><span style="font-size:0.8rem; color:#94a3b8;">추천 UI</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:20px; text-align:left;">
+        <div class="card">
+          <div class="icon">📥</div>
+          <h4>job_raw</h4>
+          <p>공공 API에서 채용공고를 수집하고, 마크다운 + JSON으로 로컬 저장. GitHub Actions로 정기 갱신.</p>
+          <div style="margin-top:12px;">
+            <span class="tag tag-blue">fetcher.py</span>
+            <span class="tag tag-blue">formatter.py</span>
+            <span class="tag tag-blue">writer.py</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="icon">⚙️</div>
+          <h4>job_core</h4>
+          <p>원문 공고 데이터를 8개 축의 Facet 위키로 변환. 만료된 공고를 정리하고 Wiki Index를 갱신.</p>
+          <div style="margin-top:12px;">
+            <span class="tag tag-green">wiki_generator.py</span>
+            <span class="tag tag-green">cleanup_expired.py</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="icon">💼</div>
+          <h4>job_career</h4>
+          <p>LLM 초안 분석 → Facet 분류 선택 → Python 점수화 추천. 3단계 매칭으로 정확도 극대화.</p>
+          <div style="margin-top:12px;">
+            <span class="tag tag-pink">Flask Server</span>
+            <span class="tag tag-pink">LLM Client</span>
+            <span class="tag tag-pink">Frontend UI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">03 / 10</div>
+  </section>
+
+  <!-- ======================== SLIDE 4: REPO STRUCTURE ======================== -->
+  <section class="slide dark" id="structure">
+    <div class="content wide">
+      <h2>Repository Structure</h2>
+      <div class="grid grid-2" style="margin-top:20px;">
+        <div>
+          <div class="tree">
+<div class="tree-line"><span class="tree-dir">job_wiki/</span> <span class="tree-comment">← Root</span></div>
+<div class="tree-line">├── <span class="tree-dir">job_raw/</span>        <span class="tree-comment"># 원천 수집</span></div>
+<div class="tree-line">│   ├── <span class="tree-file">fetcher.py</span>        <span class="tree-comment">API 호출</span></div>
+<div class="tree-line">│   ├── <span class="tree-file">formatter.py</span>      <span class="tree-comment">MD 변환</span></div>
+<div class="tree-line">│   ├── <span class="tree-file">writer.py</span>         <span class="tree-comment">파일 저장</span></div>
+<div class="tree-line">│   ├── <span class="tree-file">config.py</span>         <span class="tree-comment">환경변수</span></div>
+<div class="tree-line">│   ├── <span class="tree-dir">00_Raw/</span>          <span class="tree-comment">공고 MD</span></div>
+<div class="tree-line">│   └── <span class="tree-dir">scripts/</span>          <span class="tree-comment">실행 스크립트</span></div>
+<div class="tree-line">├── <span class="tree-dir">job_core/</span>       <span class="tree-comment"># 핵심 처리</span></div>
+<div class="tree-line">│   └── <span class="tree-dir">scripts/</span></div>
+<div class="tree-line">│       ├── <span class="tree-file">wiki_generator.py</span>  <span class="tree-comment">Facet 생성</span></div>
+<div class="tree-line">│       └── <span class="tree-file">cleanup_expired.py</span> <span class="tree-comment">만료 정리</span></div>
+<div class="tree-line">├── <span class="tree-dir">job_career/</span>     <span class="tree-comment"># 추천 서비스</span></div>
+<div class="tree-line">│   ├── <span class="tree-file">server.py</span>          <span class="tree-comment">Flask API</span></div>
+<div class="tree-line">│   ├── <span class="tree-dir">frontend/</span></div>
+<div class="tree-line">│   │   ├── <span class="tree-file">index.html</span></div>
+<div class="tree-line">│   │   ├── <span class="tree-file">styles.css</span></div>
+<div class="tree-line">│   │   └── <span class="tree-file">script.js</span></div>
+<div class="tree-line">│   └── <span class="tree-dir">src/career_agent/</span>  <span class="tree-comment">LLM+점수화</span></div>
+<div class="tree-line">└── <span class="tree-dir">job_wiki/</span>       <span class="tree-comment"># 생성된 위키</span></div>
+<div class="tree-line">    ├── <span class="tree-dir">10_Wiki/Facets/</span>   <span class="tree-comment">8개 축</span></div>
+<div class="tree-line">    └── <span class="tree-dir">20_Meta/</span></div>
+          </div>
+        </div>
+        <div>
+          <h3>Directory Roles</h3>
+          <ul class="feature-list">
+            <li><span class="check">✓</span> <strong>job_raw</strong> — 원천 데이터 수집 계층. 공공 API → 정규화 → 마크다운/JSON 저장</li>
+            <li><span class="check">✓</span> <strong>job_core</strong> — 처리 계층. raw 데이터에서 Facet 위키 생성, 만료 정리</li>
+            <li><span class="check">✓</span> <strong>job_career</strong> — 서비스 계층. Flask 웹 UI + LLM 추천 + Python 점수화</li>
+            <li><span class="check">✓</span> <strong>job_wiki</strong> — 결과물 계층. Obsidian 호환 Facet 위키 저장소</li>
+            <li><span class="check">✓</span> <strong>.github/workflows</strong> — CI/CD. 정기 수집 자동화</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">04 / 10</div>
+  </section>
+
+  <!-- ======================== SLIDE 5: FACET WIKI ======================== -->
+  <section class="slide gradient" id="facet">
+    <div class="content wide">
+      <h2>Facet-based Wiki</h2>
+      <p class="subtitle">8개 분류 축으로 채용공고를 다면적으로 구조화</p>
+
+      <div class="grid grid-4" style="margin-top:30px;">
+        <div class="card" style="text-align:center;">
+          <div class="icon">🎓</div>
+          <h4>education</h4>
+          <p>고졸 · 대졸 · 석사 · 박사 · 학력무관</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="icon">📄</div>
+          <h4>hire_type</h4>
+          <p>정규직 · 무기계약 · 비정규직 · 청년인턴</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="icon">🧩</div>
+          <h4>ncs</h4>
+          <p>NCS 직무 분류 (건설, 경영, 보건, IT 등)</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="icon">⭐</div>
+          <h4>preference</h4>
+          <p>보훈 · 장애인 · 경력단절 · 청년 · 자격증</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="icon">🔍</div>
+          <h4>process</h4>
+          <p>서류 · 필기 · 면접 · 인성검사 · 발표</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="icon">✅</div>
+          <h4>qualification</h4>
+          <p>경력 · 학위 · 자격증 · 병역 · 연령</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="icon">🏢</div>
+          <h4>recruitment_type</h4>
+          <p>신입 · 경력 · 신입+경력</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="icon">📍</div>
+          <h4>region</h4>
+          <p>17개 광역시도 근무지역</p>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:20px;">
+        <span class="tag tag-purple">Obsidian 호환</span>
+        <span class="tag tag-blue">Facet_Index.json</span>
+        <span class="tag tag-green">자동 갱신</span>
+      </div>
+    </div>
+    <div class="slide-num">05 / 10</div>
+  </section>
+
+  <!-- ======================== SLIDE 6: DATA PIPELINE ======================== -->
+  <section class="slide dark" id="pipeline">
+    <div class="content wide">
+      <h2>Data Pipeline</h2>
+      <p class="subtitle">수집 → 가공 → 서빙까지 End-to-End 자동화</p>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="step-num">STEP 1</div>
+          <div class="step-name">수집</div>
+          <div class="step-desc">GitHub Actions 트리거<br>job_raw 수집 실행</div>
+        </div>
+        <div class="flow-connector">→</div>
+        <div class="flow-step">
+          <div class="step-num">STEP 2</div>
+          <div class="step-name">정규화</div>
+          <div class="step-desc">API 응답 → MD + JSON<br>00_Raw + json_archive</div>
+        </div>
+        <div class="flow-connector">→</div>
+        <div class="flow-step">
+          <div class="step-num">STEP 3</div>
+          <div class="step-name">Wiki 변환</div>
+          <div class="step-desc">job_core wiki_generator<br>8개 Facet 위키 생성</div>
+        </div>
+        <div class="flow-connector">→</div>
+        <div class="flow-step">
+          <div class="step-num">STEP 4</div>
+          <div class="step-name">추천</div>
+          <div class="step-desc">job_career Flask 서버<br>LLM + 점수화 매칭</div>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:30px;">
+        <div class="card">
+          <h4>📤 Harvest Workflow</h4>
+          <ul class="feature-list" style="margin:0;">
+            <li><span class="check">✓</span> GitHub Actions cron (정기 실행)</li>
+            <li><span class="check">✓</span> Python main.py → 수집 → 저장</li>
+            <li><span class="check">✓</span> 만료 공고 정리 (cleanup_expired)</li>
+            <li><span class="check">✓</span> Wiki 재생성 → git push</li>
+          </ul>
+          <div style="margin-top:12px;">
+            <span class="tag tag-yellow">harvest.yml</span>
+            <span class="tag tag-white">Ubuntu Runner</span>
+          </div>
+        </div>
+        <div class="card">
+          <h4>🔄 Career Matching Flow</h4>
+          <ul class="feature-list" style="margin:0;">
+            <li><span class="check">✓</span> <strong>1단계:</strong> LLM 초기 분석 (키워드 추출)</li>
+            <li><span class="check">✓</span> <strong>2단계:</strong> Follow-up 질문으로 분류 선택</li>
+            <li><span class="check">✓</span> <strong>3단계:</strong> Python 점수화 → 최종 추천 (50%↑)</li>
+          </ul>
+          <div style="margin-top:12px;">
+            <span class="tag tag-pink">LLM (OpenCode Go)</span>
+            <span class="tag tag-blue">Python Scoring</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">06 / 10</div>
+  </section>
+
+  <!-- ======================== SLIDE 7: CAREER RECOMMENDER ======================== -->
+  <section class="slide gradient" id="career">
+    <div class="content wide">
+      <h2>Career Recommender</h2>
+      <p class="subtitle">3-Stage Matching Architecture</p>
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:16px; margin:30px 0;">
+        <!-- Stage 1 -->
+        <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:center; width:100%;">
+          <div class="card" style="flex:1; min-width:200px; max-width:300px; border-left:3px solid #818cf8;">
+            <div style="font-size:0.8rem; color:#818cf8; font-weight:700; letter-spacing:1px;">STAGE 1</div>
+            <h4 style="margin:8px 0;">LLM Initial Analysis</h4>
+            <p style="font-size:0.85rem;">사용자 입력 → LLM이 키워드/선호도 추출. 추천 기업은 아직 노출하지 않음</p>
+          </div>
+          <div style="color:#6366f1; font-size:2rem;">→</div>
+          <div class="card" style="flex:1; min-width:200px; max-width:300px; border-left:3px solid #a78bfa;">
+            <div style="font-size:0.8rem; color:#a78bfa; font-weight:700; letter-spacing:1px;">STAGE 2</div>
+            <h4 style="margin:8px 0;">Follow-up Selection</h4>
+            <p style="font-size:0.85rem;">Facet 분류 선택. LLM 키워드 + Python 검증으로 분류 확정</p>
+          </div>
+          <div style="color:#6366f1; font-size:2rem;">→</div>
+          <div class="card" style="flex:1; min-width:200px; max-width:300px; border-left:3px solid #f472b6;">
+            <div style="font-size:0.8rem; color:#f472b6; font-weight:700; letter-spacing:1px;">STAGE 3</div>
+            <h4 style="margin:8px 0;">Python Scoring</h4>
+            <p style="font-size:0.85rem;">카테고리 히트 기반 점수화. 50% 이상 매칭률 공고만 추천</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:20px;">
+        <div class="card">
+          <div class="icon">🧠</div>
+          <h4>LLM Client</h4>
+          <p>OpenCode Go (deepseek-v4-flash)로 키워드 추출 및 분류 판정. Facet Index 읽어 컨텍스트 최적화</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h4>Pipeline</h4>
+          <p>LLM → Python 분리로 비용 절감. LLM은 초안만, 최종 점수는 Python이 담당</p>
+        </div>
+        <div class="card">
+          <div class="icon">🎨</div>
+          <h4>Frontend</h4>
+          <p>Flask 서빙 HTML/CSS/JS. 반응형 UI, 단계별 결과 표시, 분류 선택 인터랙션</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">07 / 10</div>
+  </section>
+
+  <!-- ======================== SLIDE 8: TECH STACK ======================== -->
+  <section class="slide dark" id="tech">
+    <div class="content wide">
+      <h2>Tech Stack</h2>
+
+      <div class="grid grid-2" style="margin-top:30px;">
+        <div>
+          <h3>Backend</h3>
+          <div class="tech-list">
+            <div class="tech-item"><span class="tech-icon">🐍</span> Python 3.12</div>
+            <div class="tech-item"><span class="tech-icon">🌶️</span> Flask</div>
+            <div class="tech-item"><span class="tech-icon">🤖</span> OpenCode Go</div>
+            <div class="tech-item"><span class="tech-icon">🔌</span> Flask-CORS</div>
+            <div class="tech-item"><span class="tech-icon">🔐</span> python-dotenv</div>
+          </div>
+          <h3 style="margin-top:20px;">Infrastructure</h3>
+          <div class="tech-list">
+            <div class="tech-item"><span class="tech-icon">🔄</span> GitHub Actions</div>
+            <div class="tech-item"><span class="tech-icon">🐳</span> Docker</div>
+            <div class="tech-item"><span class="tech-icon">📦</span> pip/conda</div>
+          </div>
+        </div>
+        <div>
+          <h3>Frontend</h3>
+          <div class="tech-list">
+            <div class="tech-item"><span class="tech-icon">🌐</span> HTML5</div>
+            <div class="tech-item"><span class="tech-icon">🎨</span> CSS3</div>
+            <div class="tech-item"><span class="tech-icon">⚡</span> Vanilla JS</div>
+          </div>
+          <h3 style="margin-top:20px;">Data & Storage</h3>
+          <div class="tech-list">
+            <div class="tech-item"><span class="tech-icon">📝</span> Markdown</div>
+            <div class="tech-item"><span class="tech-icon">📊</span> JSON</div>
+            <div class="tech-item"><span class="tech-icon">📓</span> Obsidian 호환</div>
+          </div>
+          <h3 style="margin-top:20px;">LLM</h3>
+          <div class="tech-list">
+            <div class="tech-item"><span class="tech-icon">🧠</span> deepseek-v4-flash</div>
+            <div class="tech-item"><span class="tech-icon">✨</span> Reasoning (low)</div>
+            <div class="tech-item"><span class="tech-icon">📐</span> 8192 토큰</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">08 / 10</div>
+  </section>
+
+  <!-- ======================== SLIDE 9: CHANGELOG / TIMELINE ======================== -->
+  <section class="slide gradient" id="timeline">
+    <div class="content wide">
+      <h2>Development Timeline</h2>
+      <p class="subtitle">2026-05-21 — 주요 변경 이력</p>
+
+      <div class="grid grid-2">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">1. Raw 수집 재정립</div>
+            <div class="tl-title">NCS → 원문 필드 기반</div>
+            <div class="tl-desc">수집 기준을 NCS 하드코딩에서 공고 원문 필드 중심으로 전환</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2. MD + Archive 확장</div>
+            <div class="tl-title">formatter.py 개선</div>
+            <div class="tl-desc">원문 태그를 frontmatter에 포함, 00_Raw + json_archive 이중 저장</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">3. Facet Wiki 생성</div>
+            <div class="tl-title">wiki_generator.py</div>
+            <div class="tl-desc">raw 기반 2차 분류 위키. 8개 축 Facet + Facet_Index.json</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">4. 불필요 파일 정리</div>
+            <div class="tl-title">온톨로지/분석 스크립트 제거</div>
+            <div class="tl-desc">job_core 정리, README 갱신</div>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">5. 추천 흐름 Facet 전환</div>
+            <div class="tl-title">LLM 프롬프트 최적화</div>
+            <div class="tl-desc">온톨로지 → Facet Index 중심으로 LLM 컨텍스트 변경</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">6. 환경 로딩 디버그</div>
+            <div class="tl-title">.env 자동 로드</div>
+            <div class="tl-desc">서버/배치 모두 .env 직접 로드, 키 상태 로깅</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">7. 3-Stage 매칭 확정</div>
+            <div class="tl-title">LLM → Python 분리</div>
+            <div class="tl-desc">초기 분석은 LLM, 최종 추천은 Python-only 점수화</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">8. 문서화 & 배포</div>
+            <div class="tl-title">README, INSTALL, pyproject.toml</div>
+            <div class="tl-desc">의존성 명시, GitHub Actions 정리, 최종 push</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">09 / 10</div>
+  </section>
+
+  <!-- ======================== SLIDE 10: CTA / CLOSING ======================== -->
+  <section class="slide accent" id="closing">
+    <div class="content narrow" style="text-align:center;">
+      <div style="font-size:3rem; margin-bottom:20px;">🚀</div>
+      <h1 style="font-size:clamp(2rem, 5vw, 3.5rem);">Job Wiki</h1>
+      <p class="subtitle" style="margin-bottom:30px;">
+        공공 채용 데이터의 자동 수집, 구조화, 개인 맞춤 추천까지<br>
+        <span class="highlight">End-to-End AI Pipeline</span>
+      </p>
+
+      <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin:30px 0;">
+        <a class="btn btn-primary" href="https://github.com/khmo31/job_wiki" target="_blank">
+          📂 GitHub Repo
+        </a>
+      </div>
+
+      <p style="color:#64748b; font-size:0.9rem; margin-top:30px;">
+        <strong style="color:#a78bfa;">Tech Stack:</strong>
+        Python · Flask · OpenCode Go · GitHub Actions · Obsidian Wiki
+      </p>
+      <p style="color:#475569; font-size:0.85rem; margin-top:12px;">
+        © 2026 Kang HyeonMo · Capstone Project
+      </p>
+    </div>
+    <div class="slide-num">10 / 10</div>
+  </section>
+
+</div>
+
+<div class="footer">
+  Job Wiki Capstone · khmo31 · 2026
+</div>
+
+<script>
+  // Progress bar on scroll
+  window.addEventListener('scroll', () => {
+    const winScroll = document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById('progressBar').style.width = scrolled + '%';
+  });
+
+  // Intersection Observer for slide animations
+  const slides = document.querySelectorAll('.slide');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.content > *').forEach((el, i) => {
+          el.style.animation = 'none';
+          el.offsetHeight;
+          el.style.animation = `fadeInUp 0.6s ease ${i * 0.1}s forwards`;
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  slides.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
