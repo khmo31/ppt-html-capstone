@@ -291,22 +291,32 @@
         <div class="big">"만들고 싶어서"가 아니라<br>"이런 문제가 있어서" 만들어야 한다.</div>
       </div>
       <div style="margin-top:24px;">
-        <h3>배경</h3>
+        <h3>타겟 사용자</h3>
+        <div class="card" style="margin-bottom:16px;">
+          <div style="font-size:0.95rem; color:rgba(255,255,255,0.6); line-height:1.6;">
+            😥 <strong style="color:#e2e8f0;">자신의 진로를 명확히 탐색하지 못한 사용자</strong>가<br>
+            본인의 경험 및 흥미를 <strong style="color:#c4b5fd;">비정형적으로 작성</strong>하면,<br>
+            그걸 바탕으로 <strong style="color:#818cf8;">맞춤형 채용 공고를 추천</strong>해주는 시스템
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <h3>핵심 문제</h3>
         <ul>
-          <li>공공기관 채용공고는 <strong>ALIO(공공기관 경영정보 공개시스템)</strong>에 분산 등록</li>
-          <li>수백 개 기관의 채용 정보를 개인이 <strong>일일이 모니터링하기 어려움</strong></li>
-          <li>자신의 역량에 맞는 공고를 <strong>놓치기 쉬운 구조</strong></li>
-          <li>공고마다 직무 요건이 다르고 <strong>구조화되어 있지 않음</strong></li>
+          <li>공공기관 채용공고는 <strong>ALIO</strong>에 분산 등록 — 개인 모니터링 불가</li>
+          <li>자신의 경험을 <strong>어떤 직무와 연결</strong>해야 할지 모름</li>
+          <li>이력서/경험은 <strong>비정형 텍스트</strong> — 자동 분석이 어려움</li>
+          <li>공고마다 직무 요건이 달라 <strong>일대일 비교가 어려움</strong></li>
         </ul>
       </div>
       <div style="margin-top:20px;">
-        <h3>해결 방향</h3>
+        <h3>솔루션 방향</h3>
         <div class="pipeline">
-          <div class="pipe-box"><div class="label">수집</div><div class="value">ALIO API</div></div>
+          <div class="pipe-box"><div class="label">입력</div><div class="value">비정형 경험</div></div>
           <div class="pipe-arrow">→</div>
           <div class="pipe-box"><div class="label">분석</div><div class="value">LLM + Wiki</div></div>
           <div class="pipe-arrow">→</div>
-          <div class="pipe-box"><div class="label">매칭</div><div class="value">맞춤 추천</div></div>
+          <div class="pipe-box"><div class="label">출력</div><div class="value">맞춤 공고</div></div>
         </div>
       </div>
     </div>
@@ -327,32 +337,32 @@
     <div class="why-chain">
       <div class="why-item">
         <div class="why-num">W1</div>
-        <div><div class="why-q">왜 공고를 놓치는가?</div><div class="why-a">공공기관 채용공고가 여러 사이트에 분산되어 있어 일일이 확인하기 어렵다</div></div>
+        <div><div class="why-q">왜 사용자가 자신에게 맞는 공고를 찾지 못하는가?</div><div class="why-a">자신의 경험/흥미를 어떤 직무와 연결해야 할지 모르기 때문이다</div></div>
       </div>
       <div class="why-item">
         <div class="why-num">W2</div>
-        <div><div class="why-q">왜 자동으로 알림받을 방법이 없는가?</div><div class="why-a">구직자 맞춤형 알림/매칭 시스템이 존재하지 않는다</div></div>
+        <div><div class="why-q">왜 경험-직무 연결이 어려운가?</div><div class="why-a">사용자의 경험은 비정형 텍스트이고, 공고의 직무 요건은 각기 다른 형식으로 작성되어 있다</div></div>
       </div>
       <div class="why-item">
         <div class="why-num">W3</div>
-        <div><div class="why-q">왜 매칭 시스템이 없는가?</div><div class="why-a">채용공고 데이터가 구조화되어 있지 않아 자동 분석이 어렵다</div></div>
+        <div><div class="why-q">왜 자동으로 분석해줄 시스템이 없는가?</div><div class="why-a">채용공고 데이터와 사용자 경험을 연결하는 구조화된 매칭 시스템이 존재하지 않는다</div></div>
       </div>
       <div class="why-item">
         <div class="why-num">W4</div>
-        <div><div class="why-q">왜 데이터 구조화가 안 되어 있는가?</div><div class="why-a">각 기관이 서로 다른 형식으로 공고를 등록하고, 통합된 분류 체계가 없다</div></div>
+        <div><div class="why-q">왜 매칭 시스템을 만들기 어려운가?</div><div class="why-a">공고는 기관별로 제각각 — 통합 분류 체계(NCS, 지역, 학력 등)로 정규화해야 하며, 사용자 경험도 같은 체계로 분석해야 하기 때문이다</div></div>
       </div>
       <div class="why-item">
         <div class="why-num" style="background:rgba(124,58,237,0.3); color:#a78bfa;">W5</div>
         <div><div class="why-q" style="color:rgba(255,255,255,0.3);">진짜 문제는?</div>
         <div class="why-a" style="color:#c4b5fd; font-size:1rem;">
-          "채용공고 데이터를 구조화된 지식으로 변환하고,<br>
-          개인 역량에 맞춰 자동 매칭하는 시스템이 필요하다"
+          "진로를 탐색 중인 사용자의 비정형 경험을 분석하여,<br>
+          구조화된 채용 데이터와 자동으로 매칭하는 시스템이 필요하다"
         </div></div>
       </div>
     </div>
     <div class="highlight-box" style="margin-top:12px;">
       <div class="title">👉 진짜 문제 정의문</div>
-      <div class="text">"구직자가 자신의 역량에 맞는 공공기관 채용공고를 놓치지 않도록,<br>자동 수집 · 분석 · 매칭 시스템을 구축하자"</div>
+      <div class="text">"자신의 진로를 명확히 탐색하지 못한 사용자가 본인의 경험 및 흥미를 비정형적으로 작성하면,<br>그걸 바탕으로 맞춤형 채용 공고를 추천해주는 시스템을 개발하자"</div>
     </div>
   </div>
   <div class="slide-num">03 / 20</div>
@@ -733,24 +743,22 @@ a0d16def Update PROJECT_CHANGELOG.md
           <tr><td>📝 전형단계</td><td>9</td><td>서류, 필기, 면접, 최종...</td></tr>
           <tr><td>📖 자격요건</td><td>14</td><td>자격증, 어학, 경력, 전공...</td></tr>
         </table>
+        <div style="margin-top:8px; font-size:0.75rem; color:rgba(255,255,255,0.2);">
+          ✨ 아래 그래프를 드래그해서 연결 관계를 탐색해보세요
+        </div>
       </div>
       <div>
-        <h3>Obsidian 지식 그래프</h3>
-        <div class="card">
-          <div style="font-size:0.9rem; color:rgba(255,255,255,0.4); line-height:2;">
-            공고 → NCS 분류 → 관련 역량 → 유사 기관<br>
-            <span style="color:#a78bfa;">양방향 링크</span>로 지식 연결
-          </div>
+        <h3>Obsidian 스타일 지식 그래프</h3>
+        <div style="position:relative;">
+          <canvas id="obsidianGraph" width="420" height="420" style="width:100%; height:auto; aspect-ratio:1/1; border-radius:12px; background:rgba(0,0,0,0.3); cursor:grab; touch-action:none;"></canvas>
+          <div id="graphTooltip" style="position:absolute; display:none; background:rgba(20,20,35,0.95); border:1px solid rgba(124,58,237,0.3); border-radius:8px; padding:6px 12px; font-size:0.75rem; color:#e2e8f0; pointer-events:none; white-space:nowrap; z-index:10;"></div>
         </div>
-        <div class="highlight-box" style="margin-top:12px;">
-          <div class="title">검색 예시</div>
-          <div class="text">
-            "의료기기 연구개발" 검색 →<br>
-            <span class="tag tag-blue">NCS: 보건의료</span>
-            <span class="tag tag-green">지역: 대전</span>
-            <span class="tag tag-purple">경력: 신입+경력</span>
-            → 충남대학교병원, 분당서울대병원 등 매칭
-          </div>
+        <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#818cf8;display:inline-block;"></span> 공고</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#34d399;display:inline-block;"></span> NCS 분류</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#facc15;display:inline-block;"></span> 기관</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#f472b6;display:inline-block;"></span> 역량</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#fb923c;display:inline-block;"></span> 지역/기타</span>
         </div>
       </div>
     </div>
@@ -1193,6 +1201,246 @@ document.addEventListener('keydown', (e) => {
     if (prev) slides[prev.dataset.index].scrollIntoView({ behavior: 'smooth' });
   }
 });
+
+// ===== OBSIDIAN-STYLE FORCE-DIRECTED GRAPH =====
+(function() {
+  const canvas = document.getElementById('obsidianGraph');
+  if (!canvas) return;
+  const tooltip = document.getElementById('graphTooltip');
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width, H = canvas.height;
+  
+  // Graph data
+  const nodes = [
+    { id:'u1', label:'👤 사용자\n경험/흥미', group:'user', r:20 },
+    { id:'p1', label:'📄 충남대병원\n의료기기연구', group:'post', r:16 },
+    { id:'p2', label:'📄 분당서울대\n데이터분석', group:'post', r:16 },
+    { id:'p3', label:'📄 부산대병원\n의생명연구', group:'post', r:16 },
+    { id:'n1', label:'🧑‍💼 NCS\n보건의료', group:'ncs', r:14 },
+    { id:'n2', label:'🧑‍💼 NCS\n정보통신', group:'ncs', r:14 },
+    { id:'n3', label:'🧑‍💼 NCS\n연구', group:'ncs', r:14 },
+    { id:'r1', label:'📍 대전', group:'region', r:11 },
+    { id:'r2', label:'📍 경기', group:'region', r:11 },
+    { id:'r3', label:'📍 부산', group:'region', r:11 },
+    { id:'s1', label:'🎓 석사↑', group:'skill', r:11 },
+    { id:'s2', label:'💡 의료기기\n개발', group:'skill', r:13 },
+    { id:'s3', label:'💡 데이터\n분석', group:'skill', r:13 },
+    { id:'c1', label:'🏥 충남대\n병원', group:'company', r:15 },
+    { id:'c2', label:'🏥 분당서울\n대병원', group:'company', r:15 },
+    { id:'c3', label:'🏥 부산대\n병원', group:'company', r:15 },
+  ];
+  
+  const edges = [
+    {s:'u1',t:'s2'},{s:'u1',t:'s3'},
+    {s:'p1',t:'n1'},{s:'p1',t:'r1'},{s:'p1',t:'s1'},{s:'p1',t:'s2'},{s:'p1',t:'c1'},
+    {s:'p2',t:'n2'},{s:'p2',t:'r2'},{s:'p2',t:'s1'},{s:'p2',t:'s3'},{s:'p2',t:'c2'},
+    {s:'p3',t:'n3'},{s:'p3',t:'r3'},{s:'p3',t:'s1'},{s:'p3',t:'s2'},{s:'p3',t:'c3'},
+    {s:'n1',t:'s2'},{s:'n2',t:'s3'},{s:'n3',t:'s2'},
+    {s:'c1',t:'r1'},{s:'c2',t:'r2'},{s:'c3',t:'r3'},
+  ];
+  
+  const colors = { user:'#a78bfa', post:'#818cf8', ncs:'#34d399', region:'#fb923c', skill:'#f472b6', company:'#facc15' };
+  
+  // Physics
+  let dragNode = null, dragOff = {x:0,y:0};
+  const center = {x:W/2,y:H/2};
+  
+  function initPositions() {
+    nodes.forEach((n,i) => {
+      const angle = (i/nodes.length)*Math.PI*2;
+      const rad = 80 + Math.random()*60;
+      n.x = center.x + Math.cos(angle)*rad;
+      n.y = center.y + Math.sin(angle)*rad;
+      n.vx = 0; n.vy = 0;
+    });
+  }
+  initPositions();
+  
+  function simulate() {
+    const repel = 6000, attract = 0.005, damping = 0.85, minDist = 30;
+    // Reset forces
+    nodes.forEach(n => { n.fx = 0; n.fy = 0; });
+    // Repulsion between all nodes
+    for(let i=0;i<nodes.length;i++) {
+      for(let j=i+1;j<nodes.length;j++) {
+        let dx = nodes[j].x - nodes[i].x;
+        let dy = nodes[j].y - nodes[i].y;
+        let dist = Math.sqrt(dx*dx+dy*dy) + 1;
+        let force = repel / (dist*dist);
+        let fx = (dx/dist)*force;
+        let fy = (dy/dist)*force;
+        nodes[i].fx -= fx; nodes[i].fy -= fy;
+        nodes[j].fx += fx; nodes[j].fy += fy;
+      }
+    }
+    // Attraction along edges
+    edges.forEach(e => {
+      let a = nodes.find(n=>n.id===e.s);
+      let b = nodes.find(n=>n.id===e.t);
+      if(!a||!b) return;
+      let dx = b.x - a.x;
+      let dy = b.y - a.y;
+      let dist = Math.sqrt(dx*dx+dy*dy) + 1;
+      let force = (dist - 120) * attract;
+      let fx = (dx/dist)*force;
+      let fy = (dy/dist)*force;
+      a.fx += fx; a.fy += fy;
+      b.fx -= fx; b.fy -= fy;
+    });
+    // Center gravity
+    nodes.forEach(n => {
+      n.fx += (center.x - n.x) * 0.001;
+      n.fy += (center.y - n.y) * 0.001;
+    });
+    // Apply forces
+    nodes.forEach(n => {
+      if(n === dragNode) return;
+      n.vx = (n.vx + n.fx) * damping;
+      n.vy = (n.vy + n.fy) * damping;
+      n.x += n.vx;
+      n.y += n.vy;
+      // Keep in bounds
+      n.x = Math.max(30, Math.min(W-30, n.x));
+      n.y = Math.max(30, Math.min(H-30, n.y));
+    });
+  }
+  
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    // Edges
+    edges.forEach(e => {
+      let a = nodes.find(n=>n.id===e.s);
+      let b = nodes.find(n=>n.id===e.t);
+      if(!a||!b) return;
+      ctx.beginPath();
+      ctx.moveTo(a.x,a.y);
+      ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle = 'rgba(124,58,237,0.15)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+    // Edges from user (highlighted)
+    edges.filter(e=>e.s==='u1').forEach(e => {
+      let b = nodes.find(n=>n.id===e.t);
+      if(!b) return;
+      ctx.beginPath();
+      ctx.moveTo(nodes[0].x,nodes[0].y);
+      ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle = 'rgba(167,139,250,0.3)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+    // Nodes
+    nodes.forEach(n => {
+      const col = colors[n.group] || '#666';
+      // Glow
+      const grad = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*2);
+      grad.addColorStop(0,col+'40');
+      grad.addColorStop(1,'transparent');
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r*2,0,Math.PI*2);
+      ctx.fillStyle = grad; ctx.fill();
+      // Circle
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle = col+'30';
+      ctx.strokeStyle = col;
+      ctx.lineWidth = n===dragNode?2.5:1.5;
+      ctx.fill(); ctx.stroke();
+      // Label
+      const lines = n.label.split('\n');
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      lines.forEach((line,i) => {
+        ctx.fillStyle = n===dragNode?'#e2e8f0':'rgba(255,255,255,0.7)';
+        ctx.font = i===0?'500 9px Noto Sans KR, sans-serif':'400 8px Noto Sans KR, sans-serif';
+        ctx.fillText(line, n.x, n.y + (i - (lines.length-1)/2)*13);
+      });
+    });
+  }
+  
+  let animId = null;
+  function loop() {
+    simulate();
+    draw();
+    animId = requestAnimationFrame(loop);
+  }
+  loop();
+  
+  // Mouse/Touch interaction
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+  }
+  
+  function onDown(e) {
+    e.preventDefault();
+    const pos = getPos(e);
+    let hit = null;
+    for(let i=nodes.length-1;i>=0;i--) {
+      const n = nodes[i];
+      const dx = pos.x - n.x, dy = pos.y - n.y;
+      if(dx*dx + dy*dy < (n.r+10)*(n.r+10)) { hit = n; break; }
+    }
+    if(hit) { dragNode = hit; canvas.style.cursor = 'grabbing'; }
+  }
+  function onMove(e) {
+    e.preventDefault();
+    const pos = getPos(e);
+    if(dragNode) {
+      dragNode.x = pos.x; dragNode.y = pos.y;
+      dragNode.vx = 0; dragNode.vy = 0;
+    }
+    // Hover tooltip
+    let hover = null;
+    for(let i=nodes.length-1;i>=0;i--) {
+      const n = nodes[i];
+      const dx = pos.x - n.x, dy = pos.y - n.y;
+      if(dx*dx + dy*dy < (n.r+15)*(n.r+15)) { hover = n; break; }
+    }
+    if(hover) {
+      tooltip.style.display = 'block';
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = rect.width / canvas.width;
+      const scaleY = rect.height / canvas.height;
+      tooltip.style.left = (hover.x * scaleX + 15) + 'px';
+      tooltip.style.top = (hover.y * scaleY - 10) + 'px';
+      tooltip.textContent = hover.label.replace('\n',' - ');
+    } else {
+      tooltip.style.display = 'none';
+    }
+  }
+  function onUp(e) {
+    e.preventDefault();
+    dragNode = null;
+    canvas.style.cursor = 'grab';
+  }
+  
+  canvas.addEventListener('mousedown', onDown);
+  canvas.addEventListener('mousemove', onMove);
+  canvas.addEventListener('mouseup', onUp);
+  canvas.addEventListener('mouseleave', onUp);
+  canvas.addEventListener('touchstart', onDown, {passive:false});
+  canvas.addEventListener('touchmove', onMove, {passive:false});
+  canvas.addEventListener('touchend', onUp);
+  
+  // Resize handler
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    W = canvas.width; H = canvas.height;
+    center.x = W/2; center.y = H/2;
+    ctx.scale(dpr, dpr);
+  }
+  // Just use the CSS-defined size
+  canvas.width = 420; canvas.height = 420;
+  W = 420; H = 420;
+  center.x = W/2; center.y = H/2;
+})();
 </script>
 
 </body>
