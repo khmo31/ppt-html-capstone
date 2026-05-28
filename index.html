@@ -12,13 +12,13 @@
   html { scroll-behavior:smooth; }
   body {
     font-family:'Noto Sans KR', sans-serif;
-    background:#0a0a0f;
-    color:#e2e8f0;
+    background:#f8fafc;
+    color:#1e293b;
     overflow-x:hidden;
   }
 
   /* Progress */
-  .progress { position:fixed; top:0; left:0; right:0; height:3px; z-index:1000; background:rgba(255,255,255,0.03); }
+  .progress { position:fixed; top:0; left:0; right:0; height:3px; z-index:1000; background:rgba(0,0,0,0.04); }
   .progress-bar {
     height:100%; width:0%;
     background:linear-gradient(90deg, #4f46e5, #7c3aed);
@@ -28,10 +28,10 @@
   /* Nav */
   .nav { position:fixed; bottom:32px; left:50%; transform:translateX(-50%); z-index:999; display:flex; gap:8px; }
   .nav-dot {
-    width:10px; height:10px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.15);
+    width:10px; height:10px; border-radius:50%; border:1.5px solid rgba(79,70,229,0.2);
     background:transparent; cursor:pointer; transition:all 0.3s;
   }
-  .nav-dot.active { background:#7c3aed; border-color:#7c3aed; transform:scale(1.3); }
+  .nav-dot.active { background:#4f46e5; border-color:#4f46e5; transform:scale(1.3); }
 
   /* Slide Common */
   .slide {
@@ -41,43 +41,34 @@
   .slide::before {
     content:''; position:absolute; inset:0;
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(79,70,229,0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 50%, rgba(124,58,237,0.03) 0%, transparent 50%);
-    pointer-events:none;
-  }
-  .slide::after {
-    content:''; position:absolute; inset:0;
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(79,70,229,0.01) 40px, rgba(79,70,229,0.01) 41px),
-      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(79,70,229,0.01) 40px, rgba(79,70,229,0.01) 41px);
+      radial-gradient(ellipse at 20% 50%, rgba(79,70,229,0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(124,58,237,0.02) 0%, transparent 50%);
     pointer-events:none;
   }
   .slide-num {
     position:absolute; bottom:28px; right:36px;
-    font-size:12px; color:rgba(255,255,255,0.1);
+    font-size:12px; color:rgba(0,0,0,0.12);
     font-weight:300; letter-spacing:2px;
   }
 
   /* Typography */
   h1 {
     font-size:clamp(2rem, 5vw, 4rem); font-weight:900; line-height:1.15;
-    background:linear-gradient(135deg, #818cf8, #a78bfa, #7c3aed);
+    background:linear-gradient(135deg, #4f46e5, #7c3aed);
     -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     background-clip:text;
     text-align:center; letter-spacing:-0.02em;
   }
-  h1 .light { font-weight:300; background:none; -webkit-text-fill-color:#e2e8f0; color:#e2e8f0; }
+  h1 .light { font-weight:300; background:none; -webkit-text-fill-color:#475569; color:#475569; }
   h2 {
     font-size:clamp(1.4rem, 3vw, 2.2rem); font-weight:700; margin-bottom:24px;
-    background:linear-gradient(135deg, #a5b4fc, #c4b5fd);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    background-clip:text;
+    color:#1e293b;
   }
   h3 {
-    font-size:clamp(1.1rem, 1.8vw, 1.4rem); font-weight:500; color:#c4b5fd; margin-bottom:12px;
+    font-size:clamp(1.1rem, 1.8vw, 1.4rem); font-weight:600; color:#4f46e5; margin-bottom:12px;
   }
   .subtitle {
-    font-size:clamp(1rem, 1.5vw, 1.2rem); color:rgba(255,255,255,0.5);
+    font-size:clamp(1rem, 1.5vw, 1.2rem); color:#64748b;
     font-weight:300; text-align:center; margin-top:16px;
   }
   .content { max-width:960px; width:100%; margin:0 auto; }
@@ -87,148 +78,152 @@
   /* Cards */
   .card-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin-top:16px; }
   .card {
-    background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+    background:#ffffff; border:1px solid rgba(0,0,0,0.06);
     border-radius:12px; padding:20px; transition:all 0.3s;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
   }
-  .card:hover { background:rgba(255,255,255,0.06); border-color:rgba(124,58,237,0.3); }
+  .card:hover { box-shadow:0 4px 12px rgba(79,70,229,0.08); border-color:rgba(79,70,229,0.15); }
   .card-icon { font-size:1.8rem; margin-bottom:8px; }
-  .card-title { font-weight:600; font-size:0.95rem; margin-bottom:6px; color:#e2e8f0; }
-  .card-text { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.5; }
+  .card-title { font-weight:600; font-size:0.95rem; margin-bottom:6px; color:#1e293b; }
+  .card-text { font-size:0.85rem; color:#64748b; line-height:1.5; }
 
   /* Lists */
   ul, ol { padding-left:20px; }
-  li { margin-bottom:8px; line-height:1.6; color:rgba(255,255,255,0.75); font-size:0.95rem; }
-  li strong { color:#e2e8f0; }
+  li { margin-bottom:8px; line-height:1.6; color:#475569; font-size:0.95rem; }
+  li strong { color:#1e293b; }
 
   /* Tables */
   table { width:100%; border-collapse:collapse; margin-top:12px; font-size:0.9rem; }
-  th, td { padding:10px 14px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.06); }
-  th { background:rgba(79,70,229,0.15); color:#a5b4fc; font-weight:600; font-size:0.85rem; }
-  td { color:rgba(255,255,255,0.7); }
-  tr:hover td { background:rgba(255,255,255,0.02); }
+  th, td { padding:10px 14px; text-align:left; border-bottom:1px solid rgba(0,0,0,0.06); }
+  th { background:rgba(79,70,229,0.06); color:#4f46e5; font-weight:600; font-size:0.85rem; }
+  td { color:#475569; }
+  tr:hover td { background:rgba(79,70,229,0.02); }
 
   /* Tags */
   .tag {
     display:inline-block; padding:3px 10px; border-radius:20px;
     font-size:0.75rem; font-weight:500; margin:2px;
   }
-  .tag-blue { background:rgba(79,70,229,0.2); color:#818cf8; }
-  .tag-green { background:rgba(16,185,129,0.2); color:#34d399; }
-  .tag-red { background:rgba(239,68,68,0.2); color:#f87171; }
-  .tag-yellow { background:rgba(234,179,8,0.2); color:#facc15; }
-  .tag-purple { background:rgba(124,58,237,0.2); color:#a78bfa; }
+  .tag-blue { background:rgba(79,70,229,0.08); color:#4f46e5; }
+  .tag-green { background:rgba(16,185,129,0.08); color:#059669; }
+  .tag-red { background:rgba(239,68,68,0.08); color:#dc2626; }
+  .tag-yellow { background:rgba(234,179,8,0.08); color:#a16207; }
+  .tag-purple { background:rgba(124,58,237,0.08); color:#7c3aed; }
 
   /* Pipeline */
   .pipeline { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; margin:20px 0; }
   .pipe-box {
-    background:rgba(79,70,229,0.1); border:1px solid rgba(79,70,229,0.2);
+    background:#ffffff; border:1px solid rgba(79,70,229,0.15);
     border-radius:8px; padding:12px 18px; text-align:center; min-width:100px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
   }
-  .pipe-box .label { font-size:0.75rem; color:rgba(255,255,255,0.4); }
-  .pipe-box .value { font-size:0.95rem; font-weight:600; color:#c4b5fd; }
-  .pipe-arrow { color:rgba(255,255,255,0.15); font-size:1.4rem; }
+  .pipe-box .label { font-size:0.75rem; color:#94a3b8; }
+  .pipe-box .value { font-size:0.95rem; font-weight:600; color:#4f46e5; }
+  .pipe-arrow { color:#cbd5e1; font-size:1.4rem; }
 
   /* Why chain */
   .why-chain { margin:16px 0; }
   .why-item {
     display:flex; align-items:flex-start; gap:12px; padding:8px 0;
-    border-bottom:1px solid rgba(255,255,255,0.04);
+    border-bottom:1px solid rgba(0,0,0,0.04);
   }
   .why-num {
-    width:28px; height:28px; border-radius:50%; background:rgba(79,70,229,0.2);
+    width:28px; height:28px; border-radius:50%; background:rgba(79,70,229,0.08);
     display:flex; align-items:center; justify-content:center;
-    font-size:0.75rem; font-weight:700; color:#818cf8; flex-shrink:0;
+    font-size:0.75rem; font-weight:700; color:#4f46e5; flex-shrink:0;
   }
-  .why-q { color:rgba(255,255,255,0.5); font-size:0.9rem; }
-  .why-a { color:#e2e8f0; font-weight:500; font-size:0.95rem; }
+  .why-q { color:#94a3b8; font-size:0.9rem; }
+  .why-a { color:#1e293b; font-weight:500; font-size:0.95rem; }
 
   /* Phase timeline */
   .phase { margin:16px 0; }
   .phase-row {
     display:flex; gap:16px; padding:14px 16px; margin-bottom:10px;
-    border-radius:10px; border-left:3px solid;
+    border-radius:10px; border-left:3px solid; background:#ffffff;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
   }
-  .phase-row.p1 { background:rgba(239,68,68,0.06); border-color:#ef4444; }
-  .phase-row.p2 { background:rgba(234,179,8,0.06); border-color:#eab308; }
-  .phase-row.p3 { background:rgba(16,185,129,0.06); border-color:#10b981; }
+  .phase-row.p1 { border-color:#ef4444; }
+  .phase-row.p2 { border-color:#eab308; }
+  .phase-row.p3 { border-color:#10b981; }
   .phase-tag { font-size:0.75rem; font-weight:600; white-space:nowrap; padding-top:2px; }
-  .p1 .phase-tag { color:#f87171; } .p2 .phase-tag { color:#facc15; } .p3 .phase-tag { color:#34d399; }
+  .p1 .phase-tag { color:#dc2626; } .p2 .phase-tag { color:#a16207; } .p3 .phase-tag { color:#059669; }
   .phase-content { flex:1; }
-  .phase-title { font-weight:600; color:#e2e8f0; margin-bottom:4px; }
-  .phase-desc { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.5; }
+  .phase-title { font-weight:600; color:#1e293b; margin-bottom:4px; }
+  .phase-desc { font-size:0.85rem; color:#64748b; line-height:1.5; }
 
   /* Metrics */
   .metrics { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin:20px 0; }
   .metric {
-    text-align:center; padding:20px 28px; background:rgba(255,255,255,0.02);
-    border:1px solid rgba(255,255,255,0.06); border-radius:12px; min-width:120px;
+    text-align:center; padding:20px 28px; background:#ffffff;
+    border:1px solid rgba(0,0,0,0.06); border-radius:12px; min-width:120px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
   }
-  .metric-num { font-size:2rem; font-weight:900; background:linear-gradient(135deg,#818cf8,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .metric-label { font-size:0.8rem; color:rgba(255,255,255,0.4); margin-top:4px; }
+  .metric-num { font-size:2rem; font-weight:900; color:#4f46e5; }
+  .metric-label { font-size:0.8rem; color:#94a3b8; margin-top:4px; }
 
   /* Grid for 9 windows */
   .grid-9 {
     display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin:12px 0;
   }
   .grid-9 div {
-    background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04);
-    border-radius:8px; padding:12px; text-align:center; font-size:0.8rem;
+    background:#ffffff; border:1px solid rgba(0,0,0,0.04);
+    border-radius:8px; padding:12px; text-align:center; font-size:0.8rem; color:#475569;
   }
-  .grid-9 .header { background:rgba(79,70,229,0.1); border-color:rgba(79,70,229,0.2); color:#a5b4fc; font-weight:600; }
-  .grid-9 .highlight { background:rgba(124,58,237,0.08); border-color:rgba(124,58,237,0.2); }
-
-  /* Code */
-  code {
-    font-family:'Fira Code', monospace; font-size:0.82rem;
-    background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:4px;
-  }
-  pre code {
-    display:block; padding:16px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.06);
-    border-radius:8px; overflow-x:auto; line-height:1.6;
-  }
+  .grid-9 .header { background:rgba(79,70,229,0.06); border-color:rgba(79,70,229,0.1); color:#4f46e5; font-weight:600; }
+  .grid-9 .highlight { background:rgba(79,70,229,0.04); border-color:rgba(79,70,229,0.1); font-weight:500; color:#4f46e5; }
 
   /* Highlight box */
   .highlight-box {
-    background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.2);
+    background:rgba(79,70,229,0.04); border:1px solid rgba(79,70,229,0.12);
     border-radius:12px; padding:20px 24px; margin:16px 0;
   }
-  .highlight-box .title { color:#a78bfa; font-weight:600; margin-bottom:6px; }
-  .highlight-box .text { color:rgba(255,255,255,0.7); line-height:1.6; font-size:0.95rem; }
+  .highlight-box .title { color:#4f46e5; font-weight:600; margin-bottom:6px; }
+  .highlight-box .text { color:#475569; line-height:1.6; font-size:0.95rem; }
   .highlight-box .big {
     font-size:clamp(1.1rem, 2vw, 1.4rem); font-weight:700;
-    color:#c4b5fd; line-height:1.5; text-align:center;
+    color:#4f46e5; line-height:1.5; text-align:center;
   }
   .highlight-box .big2 {
     font-size:clamp(1rem, 1.5vw, 1.2rem); font-weight:500;
-    color:#e2e8f0; line-height:1.6; text-align:center;
+    color:#1e293b; line-height:1.6; text-align:center;
   }
 
   /* Split layout */
   .split { display:flex; gap:24px; align-items:flex-start; }
   .split > * { flex:1; }
 
-  /* Q&A */
-  .qa-item { margin-bottom:12px; }
-  .qa-q { color:#a78bfa; font-weight:500; font-size:0.95rem; }
-  .qa-a { color:rgba(255,255,255,0.6); font-size:0.9rem; margin-top:4px; line-height:1.5; }
-
   /* Section number badge */
   .badge {
-    display:inline-block; background:rgba(79,70,229,0.15); color:#818cf8;
+    display:inline-block; background:rgba(79,70,229,0.08); color:#4f46e5;
     font-size:0.75rem; font-weight:600; padding:3px 10px; border-radius:20px;
     margin-bottom:16px; letter-spacing:1px;
+  }
+
+  /* Code */
+  code {
+    font-family:'Fira Code', monospace; font-size:0.82rem;
+    background:rgba(0,0,0,0.04); padding:2px 6px; border-radius:4px;
+    color:#475569;
+  }
+  pre code {
+    display:block; padding:16px; background:#f1f5f9; border:1px solid rgba(0,0,0,0.06);
+    border-radius:8px; overflow-x:auto; line-height:1.6; color:#334155;
   }
 
   /* Scroll indicator */
   .scroll-hint {
     position:absolute; bottom:60px; left:50%; transform:translateX(-50%);
-    color:rgba(255,255,255,0.15); font-size:0.8rem;
+    color:#94a3b8; font-size:0.8rem;
     animation:bounce 2s infinite;
   }
   @keyframes bounce {
     0%,100%{transform:translateX(-50%) translateY(0)}
     50%{transform:translateX(-50%) translateY(8px)}
   }
+
+  /* Graph canvas */
+  .graph-wrap { position:relative; }
+  .graph-wrap canvas { width:100%; height:auto; aspect-ratio:1/1; border-radius:12px; background:#f8fafc; border:1px solid rgba(0,0,0,0.06); cursor:grab; touch-action:none; }
 
   /* Responsive */
   @media (max-width:768px) {
@@ -254,28 +249,28 @@
   <div class="content center-text">
     <div style="font-size:3rem; margin-bottom:24px;">🏗️</div>
     <h1>job_wiki</h1>
-    <div style="font-size:clamp(1rem, 2vw, 1.5rem); color:rgba(255,255,255,0.4); font-weight:300; margin-top:12px;">
+    <div style="font-size:clamp(1rem, 2vw, 1.5rem); color:#64748b; font-weight:300; margin-top:12px;">
       공공기관 채용공고 자동 수집 · 위키 변환 · AI 매칭
     </div>
     <div style="margin-top:48px;">
       <div style="display:flex; justify-content:center; gap:32px; flex-wrap:wrap;">
         <div style="text-align:center;">
-          <div style="font-weight:700; color:#c4b5fd;">강현모</div>
-          <div style="font-size:0.8rem; color:rgba(255,255,255,0.3);">백엔드</div>
+          <div style="font-weight:700; color:#4f46e5;">강현모</div>
+          <div style="font-size:0.8rem; color:#94a3b8;">백엔드</div>
         </div>
         <div style="text-align:center;">
-          <div style="font-weight:700; color:#c4b5fd;">양병현</div>
-          <div style="font-size:0.8rem; color:rgba(255,255,255,0.3);">프론트엔드</div>
+          <div style="font-weight:700; color:#4f46e5;">양병현</div>
+          <div style="font-size:0.8rem; color:#94a3b8;">프론트엔드</div>
         </div>
         <div style="text-align:center;">
-          <div style="font-weight:700; color:#c4b5fd;">권오규</div>
-          <div style="font-size:0.8rem; color:rgba(255,255,255,0.3);">QA</div>
+          <div style="font-weight:700; color:#4f46e5;">권오규</div>
+          <div style="font-size:0.8rem; color:#94a3b8;">QA</div>
         </div>
       </div>
-      <div style="margin-top:20px; font-size:0.85rem; color:rgba(255,255,255,0.2);">12조 · 캡스톤프로젝트 · 2026-1</div>
+      <div style="margin-top:20px; font-size:0.85rem; color:#94a3b8;">12조 · 캡스톤프로젝트 · 2026-1</div>
     </div>
   </div>
-  <div class="slide-num">01 / 20</div>
+  <div class="slide-num">01 / 19</div>
   <div class="scroll-hint">↓ 스크롤</div>
 </section>
 
@@ -293,10 +288,10 @@
       <div style="margin-top:24px;">
         <h3>타겟 사용자</h3>
         <div class="card" style="margin-bottom:16px;">
-          <div style="font-size:0.95rem; color:rgba(255,255,255,0.6); line-height:1.6;">
-            😥 <strong style="color:#e2e8f0;">자신의 진로를 명확히 탐색하지 못한 사용자</strong>가<br>
-            본인의 경험 및 흥미를 <strong style="color:#c4b5fd;">비정형적으로 작성</strong>하면,<br>
-            그걸 바탕으로 <strong style="color:#818cf8;">맞춤형 채용 공고를 추천</strong>해주는 시스템
+          <div style="font-size:0.95rem; color:#475569; line-height:1.6;">
+            😥 <strong style="color:#1e293b;">자신의 진로를 명확히 탐색하지 못한 사용자</strong>가<br>
+            본인의 경험 및 흥미를 <strong style="color:#4f46e5;">비정형적으로 작성</strong>하면,<br>
+            그걸 바탕으로 <strong style="color:#4f46e5;">맞춤형 채용 공고를 추천</strong>해주는 시스템
           </div>
         </div>
       </div>
@@ -321,7 +316,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">02 / 20</div>
+  <div class="slide-num">02 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -352,9 +347,9 @@
         <div><div class="why-q">왜 매칭 시스템을 만들기 어려운가?</div><div class="why-a">공고는 기관별로 제각각 — 통합 분류 체계(NCS, 지역, 학력 등)로 정규화해야 하며, 사용자 경험도 같은 체계로 분석해야 하기 때문이다</div></div>
       </div>
       <div class="why-item">
-        <div class="why-num" style="background:rgba(124,58,237,0.3); color:#a78bfa;">W5</div>
-        <div><div class="why-q" style="color:rgba(255,255,255,0.3);">진짜 문제는?</div>
-        <div class="why-a" style="color:#c4b5fd; font-size:1rem;">
+        <div class="why-num" style="background:rgba(79,70,229,0.15); color:#4f46e5;">W5</div>
+        <div><div class="why-q" style="color:#94a3b8;">진짜 문제는?</div>
+        <div class="why-a" style="color:#4f46e5; font-size:1rem;">
           "진로를 탐색 중인 사용자의 비정형 경험을 분석하여,<br>
           구조화된 채용 데이터와 자동으로 매칭하는 시스템이 필요하다"
         </div></div>
@@ -365,7 +360,7 @@
       <div class="text">"자신의 진로를 명확히 탐색하지 못한 사용자가 본인의 경험 및 흥미를 비정형적으로 작성하면,<br>그걸 바탕으로 맞춤형 채용 공고를 추천해주는 시스템을 개발하자"</div>
     </div>
   </div>
-  <div class="slide-num">03 / 20</div>
+  <div class="slide-num">03 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -379,12 +374,12 @@
       <div>
         <h3>입력 / 출력</h3>
         <div class="card" style="margin-bottom:12px;">
-          <div style="font-weight:600; color:#818cf8;">INPUT</div>
-          <div style="font-size:0.9rem; color:rgba(255,255,255,0.5); margin-top:4px;">ALIO API → 공공기관 채용공고 원문</div>
+          <div style="font-weight:600; color:#4f46e5;">INPUT</div>
+          <div style="font-size:0.9rem; color:#64748b; margin-top:4px;">ALIO API → 공공기관 채용공고 원문</div>
         </div>
         <div class="card">
-          <div style="font-weight:600; color:#34d399;">OUTPUT</div>
-          <div style="font-size:0.9rem; color:rgba(255,255,255,0.5); margin-top:4px;">맞춤형 채용공고 추천 리스트 (Top-5)</div>
+          <div style="font-weight:600; color:#059669;">OUTPUT</div>
+          <div style="font-size:0.9rem; color:#64748b; margin-top:4px;">맞춤형 채용공고 추천 리스트 (Top-5)</div>
         </div>
       </div>
       <div>
@@ -407,7 +402,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">04 / 20</div>
+  <div class="slide-num">04 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -418,24 +413,24 @@
     <div class="badge">02. 시스템 설계</div>
     <h2>전체 아키텍처</h2>
     <div class="center-text" style="margin:24px 0;">
-      <div style="display:inline-block; background:rgba(79,70,229,0.08); border:1px solid rgba(79,70,229,0.15); border-radius:16px; padding:24px 32px;">
-        <div style="font-size:0.8rem; color:rgba(255,255,255,0.3); margin-bottom:12px;">3-Stage Pipeline</div>
+      <div style="display:inline-block; background:#ffffff; border:1px solid rgba(79,70,229,0.1); border-radius:16px; padding:24px 32px; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+        <div style="font-size:0.8rem; color:#94a3b8; margin-bottom:12px;">3-Stage Pipeline</div>
         <div class="pipeline">
-          <div class="pipe-box" style="background:rgba(59,130,246,0.1); border-color:rgba(59,130,246,0.25);">
+          <div class="pipe-box" style="background:rgba(59,130,246,0.04); border-color:rgba(59,130,246,0.2);">
             <div style="font-size:1.5rem; margin-bottom:4px;">📡</div>
-            <div class="value" style="color:#60a5fa;">Step 1</div>
+            <div class="value" style="color:#3b82f6;">Step 1</div>
             <div class="label">수집 파이프라인</div>
           </div>
           <div class="pipe-arrow">→</div>
-          <div class="pipe-box" style="background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.25);">
+          <div class="pipe-box" style="background:rgba(16,185,129,0.04); border-color:rgba(16,185,129,0.2);">
             <div style="font-size:1.5rem; margin-bottom:4px;">🗂️</div>
-            <div class="value" style="color:#34d399;">Step 2</div>
+            <div class="value" style="color:#059669;">Step 2</div>
             <div class="label">Wiki 변환</div>
           </div>
           <div class="pipe-arrow">→</div>
-          <div class="pipe-box" style="background:rgba(139,92,246,0.1); border-color:rgba(139,92,246,0.25);">
+          <div class="pipe-box" style="background:rgba(139,92,246,0.04); border-color:rgba(139,92,246,0.2);">
             <div style="font-size:1.5rem; margin-bottom:4px;">🤖</div>
-            <div class="value" style="color:#a78bfa;">Step 3</div>
+            <div class="value" style="color:#7c3aed;">Step 3</div>
             <div class="label">매칭 엔진</div>
           </div>
         </div>
@@ -459,7 +454,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">05 / 20</div>
+  <div class="slide-num">05 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -481,8 +476,8 @@
 └── scripts/
     ├── main.py     # 배치 실행기
     └── harvester.py # 수집 → 저장</code></pre>
-        <div style="font-size:0.85rem; color:rgba(255,255,255,0.4);">
-          ✅ 기술 선택 근거: 크롤링 대신 <strong>공식 ALIO API</strong> 직접 사용 (안정성 ↑)
+        <div style="font-size:0.85rem; color:#64748b;">
+          ✅ 크롤링 대신 <strong>공식 ALIO API</strong> 직접 사용 (안정성 ↑)
         </div>
       </div>
       <div>
@@ -495,17 +490,18 @@
     ├── education/     # 7개 학력
     ├── hire_type/     # 5개 고용형태
     └── ...</code></pre>
-        <div style="font-size:0.85rem; color:rgba(255,255,255,0.4);">
-          ✅ Obsidian 양방향 링크로 <strong>지식 그래프</strong> 구축
+        <div style="font-size:0.85rem; color:#64748b;">
+          ✅ <strong>초기 임베딩 방식 → Wiki 방식</strong>으로 변경<br>
+          &nbsp;&nbsp;&nbsp;임베딩은 유사도만 알려주지만, Wiki는 관계와 맥락을 구조화
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-num">06 / 20</div>
+  <div class="slide-num">06 / 19</div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 7: STEP 3 DETAIL -->
+<!-- SLIDE 7: STEP 3 DETAIL - UPDATED LLM -->
 <!-- ============================== -->
 <section class="slide" id="s7">
   <div class="content">
@@ -514,34 +510,38 @@
     <div class="split" style="margin-top:16px;">
       <div>
         <h3>매칭 프로세스</h3>
-        <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:16px;">
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.06);">👤 사용자 프로필 입력</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.06);">↓</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.06); color:#818cf8;">LLM 키워드 추출 (멀티 Provider)</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.06);">↓</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.06); color:#a78bfa;">OntologyCheck → 표준 키워드 정규화</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.06);">↓</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.06); color:#34d399;">Wiki_Index 검색 → 유사도 점수화</div>
+        <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:16px;">
+          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06);">👤 사용자 프로필 입력</div>
+          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06);">↓</div>
+          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06); color:#4f46e5;">LLM 키워드 추출 (<strong>OpenCode Go API</strong>)</div>
+          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06);">↓</div>
+          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06); color:#7c3aed;">OntologyCheck → 표준 키워드 정규화</div>
+          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06);">↓</div>
+          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06); color:#059669;">Wiki_Index 검색 → 유사도 점수화</div>
           <div style="text-align:center; padding:6px 0;">↓</div>
-          <div style="text-align:center; padding:6px 0; font-weight:600; color:#facc15;">🏆 Top-5 기관 추천</div>
+          <div style="text-align:center; padding:6px 0; font-weight:600; color:#a16207;">🏆 Top-5 기관 추천</div>
         </div>
       </div>
       <div>
-        <h3>멀티 LLM Provider 전략</h3>
-        <div style="font-weight:300; font-size:0.85rem; color:rgba(255,255,255,0.3); margin-bottom:12px;">왜 3개나 사용했는가?</div>
+        <h3>LLM 전략</h3>
+        <div style="font-weight:300; font-size:0.85rem; color:#64748b; margin-bottom:12px;">주력 + 폴백 구조</div>
         <table>
-          <tr><th>Provider</th><th>용도</th><th>이유</th></tr>
-          <tr><td><span class="tag tag-blue">NVIDIA</span></td><td>주력 엔진</td><td>고성능 추론</td></tr>
-          <tr><td><span class="tag tag-green">OpenAI</span></td><td>보조 분석</td><td>범용성</td></tr>
-          <tr><td><span class="tag tag-yellow">Groq</span></td><td>폴백 (6개 모델)</td><td>✅ 비용 0원</td></tr>
+          <tr><th>구분</th><th>Provider</th><th>조건</th></tr>
+          <tr><td><span class="tag tag-blue">주력</span></td><td><strong>OpenCode Go API</strong></td><td>일반 매칭 시 항상 사용</td></tr>
+          <tr><td><span class="tag tag-yellow">폴백</span></td><td>Groq (6개 모델)</td><td>API 장애/타임아웃 시 자동 전환</td></tr>
         </table>
-        <div style="margin-top:12px; font-size:0.85rem; color:rgba(255,255,255,0.4);">
-          💡 단일 Provider 의존성 제거 = <strong>안정성 ↑</strong>
+        <div class="highlight-box" style="margin-top:12px;">
+          <div class="title">🎯 단일 LLM 전략의 장점</div>
+          <div class="text">
+            • 응답 일관성 유지 (동일 모델로 추론)<br>
+            • API 비용 예측 가능<br>
+            • Groq 폴백으로 안정성 확보
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-num">07 / 20</div>
+  <div class="slide-num">07 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -555,19 +555,19 @@
       <tr><th>구성요소</th><th>선택</th><th>대안</th><th>선정 이유</th></tr>
       <tr>
         <td>📡 데이터 소스</td><td><span class="tag tag-blue">ALIO API</span></td><td>웹 크롤링</td>
-        <td>공식 API로 안정적, 크롤링 대비 차단 위험 없음</td>
+        <td>공식 API로 안정적, 차단 위험 없음</td>
       </tr>
       <tr>
-        <td>🤖 LLM</td><td><span class="tag tag-purple">NVIDIA+OpenAI+Groq</span></td><td>단일 Provider</td>
-        <td>비용 + 속도 + 안정성 트레이드오프 최적화</td>
+        <td>🤖 LLM</td><td><span class="tag tag-purple">OpenCode Go API</span></td><td>단일 Provider</td>
+        <td>일관된 응답 + Groq 폴백으로 안정성 ↑</td>
       </tr>
       <tr>
-        <td>🗂️ 저장소</td><td><span class="tag tag-green">Obsidian Wiki</span></td><td>RDB (MySQL 등)</td>
-        <td>지식 연결 + 시각화 용이, 포트폴리오 가치 ↑</td>
+        <td>🗂️ 데이터 저장</td><td><span class="tag tag-green">Facet Wiki</span></td><td>Vector DB (임베딩)</td>
+        <td>임베딩은 유사도만 제공, Wiki는 관계 구조화 + 설명 가능</td>
       </tr>
       <tr>
         <td>🔄 CI/CD</td><td><span class="tag tag-yellow">GitHub Actions</span></td><td>Jenkins</td>
-        <td>설정 간단, 무료, GitHub와 통합</td>
+        <td>설정 간단, 무료, GitHub 통합</td>
       </tr>
       <tr>
         <td>🌐 웹 UI</td><td><span class="tag tag-blue">Vanilla HTML/CSS/JS</span></td><td>React, Vue</td>
@@ -575,15 +575,19 @@
       </tr>
     </table>
     <div class="highlight-box" style="margin-top:20px;">
-      <div class="title">🎯 설계 원칙</div>
-      <div class="text">"필요한 만큼만, 그리고 교체 가능하게" — 모든 구성 요소는 독립적으로 교체 가능</div>
+      <div class="title">🎯 아키텍처 결정: 임베딩(Vector DB) → Wiki 전환</div>
+      <div class="text">
+        초기에는 OpenAI Embedding으로 유사도 검색을 시도했으나,<br>
+        <strong>"의료기기 연구개발"</strong>과 <strong>"의공학"</strong>의 관계를 설명하지 못하는 한계 발견<br>
+        → NCS 분류 체계 기반 <strong>Facet Wiki</strong>로 전환하여 관계와 맥락을 구조화
+      </div>
     </div>
   </div>
-  <div class="slide-num">08 / 20</div>
+  <div class="slide-num">08 / 19</div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 9: ARCHITECTURE EVOLUTION (KEY SLIDE) -->
+<!-- SLIDE 9: ARCHITECTURE EVOLUTION -->
 <!-- ============================== -->
 <section class="slide" id="s9">
   <div class="content">
@@ -622,20 +626,20 @@
           <div class="phase-desc">
             GitHub Actions CI/CD 구축 → 매주 월요일 09:00 KST 자동 수집<br>
             프론트엔드 복구, main_batch.py 복원<br>
-            지속적 운영 중 (24주+)
+            OpenCode Go API 주력 채택
           </div>
         </div>
       </div>
     </div>
     <div style="text-align:center; margin-top:12px;">
       <span class="tag tag-red">CrewAI</span>
-      <span style="color:rgba(255,255,255,0.2); margin:0 8px;">→</span>
+      <span style="color:#cbd5e1; margin:0 8px;">→</span>
       <span class="tag tag-green">자체 LLM Client</span>
-      <span style="color:rgba(255,255,255,0.2); margin:0 8px;">→</span>
+      <span style="color:#cbd5e1; margin:0 8px;">→</span>
       <span class="tag tag-blue">60% Token 절감</span>
     </div>
   </div>
-  <div class="slide-num">09 / 20</div>
+  <div class="slide-num">09 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -649,36 +653,36 @@
       <div>
         <h3>Before (CrewAI)</h3>
         <div class="card" style="margin-bottom:8px;">
-          <div style="color:#f87171; font-weight:600;">❌ 느린 응답</div>
-          <div style="font-size:0.85rem; color:rgba(255,255,255,0.4);">Multi-Agent 오버헤드</div>
+          <div style="color:#dc2626; font-weight:600;">❌ 느린 응답</div>
+          <div style="font-size:0.85rem; color:#64748b;">Multi-Agent 오버헤드</div>
         </div>
         <div class="card" style="margin-bottom:8px;">
-          <div style="color:#f87171; font-weight:600;">❌ 디버깅 어려움</div>
-          <div style="font-size:0.85rem; color:rgba(255,255,255,0.4);">블랙박스 추상화</div>
+          <div style="color:#dc2626; font-weight:600;">❌ 디버깅 어려움</div>
+          <div style="font-size:0.85rem; color:#64748b;">블랙박스 추상화</div>
         </div>
         <div class="card">
-          <div style="color:#f87171; font-weight:600;">❌ 의존성 과다</div>
-          <div style="font-size:0.85rem; color:rgba(255,255,255,0.4);">업데이트 시 영향 범위 큼</div>
+          <div style="color:#dc2626; font-weight:600;">❌ 의존성 과다</div>
+          <div style="font-size:0.85rem; color:#64748b;">업데이트 시 영향 범위 큼</div>
         </div>
       </div>
       <div>
         <h3>After (자체 구현)</h3>
         <div class="card" style="margin-bottom:8px; border-color:rgba(16,185,129,0.2);">
-          <div style="color:#34d399; font-weight:600;">✅ Token 60% 절감</div>
-          <div style="font-size:0.85rem; color:rgba(255,255,255,0.4);">온톨로지 제한 + 청크 최적화</div>
+          <div style="color:#059669; font-weight:600;">✅ Token 60% 절감</div>
+          <div style="font-size:0.85rem; color:#64748b;">온톨로지 제한 + 청크 최적화</div>
         </div>
         <div class="card" style="margin-bottom:8px; border-color:rgba(16,185,129,0.2);">
-          <div style="color:#34d399; font-weight:600;">✅ 디버깅 용이</div>
-          <div style="font-size:0.85rem; color:rgba(255,255,255,0.4);">직접 구현으로 완전한 제어</div>
+          <div style="color:#059669; font-weight:600;">✅ 디버깅 용이</div>
+          <div style="font-size:0.85rem; color:#64748b;">직접 구현으로 완전한 제어</div>
         </div>
         <div class="card" style="border-color:rgba(16,185,129,0.2);">
-          <div style="color:#34d399; font-weight:600;">✅ 의존성 최소화</div>
-          <div style="font-size:0.85rem; color:rgba(255,255,255,0.4);">pip install만으로 실행 가능</div>
+          <div style="color:#059669; font-weight:600;">✅ 의존성 최소화</div>
+          <div style="font-size:0.85rem; color:#64748b;">pip install만으로 실행 가능</div>
         </div>
       </div>
     </div>
-    <div style="margin-top:16px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:14px;">
-      <div style="font-size:0.85rem; color:rgba(255,255,255,0.3); margin-bottom:6px;">📁 Git commit 증빙</div>
+    <div style="margin-top:16px; background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px;">
+      <div style="font-size:0.85rem; color:#64748b; margin-bottom:6px;">📁 Git commit 증빙</div>
       <code style="font-size:0.8rem;">
 b8029bba auto: 채용공고 수집 (2026-05-24)<br>
 ff5980e5 cleanup test<br>
@@ -687,7 +691,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </code>
     </div>
   </div>
-  <div class="slide-num">10 / 20</div>
+  <div class="slide-num">10 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -710,20 +714,19 @@ a0d16def Update PROJECT_CHANGELOG.md
     <div style="margin-top:24px;">
       <div class="card" style="text-align:left;">
         <div style="font-weight:600; margin-bottom:8px;">📂 00_Raw/ 실제 데이터 예시</div>
-        <code style="font-size:0.75rem; line-height:1.8;">
-20260515_300550_분당서울대학교병원_신입(업무지원직)_직원_채용_공고.md<br>
-20260515_300556_부산대학교병원_2026년도_일반직(간호직)_신규직원_채용.md<br>
-20260515_300566_한국에너지기술평가원_2026년도_제2차_신규직원_채용.md<br>
-20260515_300613_충남대학교병원_전문계약직(의료기기연구개발)_채용.md
+        <code style="font-size:0.75rem; line-height:1.8; color:#475569;">
+20260515_300550_분당서울대병원_신입(업무지원직)_채용.md<br>
+20260515_300556_부산대병원_일반직(간호직)_채용.md<br>
+20260515_300613_충남대병원_전문계약직(의료기기연구개발).md
         </code>
       </div>
     </div>
   </div>
-  <div class="slide-num">11 / 20</div>
+  <div class="slide-num">11 / 19</div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 12: WIKI STRUCTURE -->
+<!-- SLIDE 12: FACET WIKI + GRAPH -->
 <!-- ============================== -->
 <section class="slide" id="s12">
   <div class="content">
@@ -743,27 +746,27 @@ a0d16def Update PROJECT_CHANGELOG.md
           <tr><td>📝 전형단계</td><td>9</td><td>서류, 필기, 면접, 최종...</td></tr>
           <tr><td>📖 자격요건</td><td>14</td><td>자격증, 어학, 경력, 전공...</td></tr>
         </table>
-        <div style="margin-top:8px; font-size:0.75rem; color:rgba(255,255,255,0.2);">
+        <div style="margin-top:8px; font-size:0.75rem; color:#94a3b8;">
           ✨ 아래 그래프를 드래그해서 연결 관계를 탐색해보세요
         </div>
       </div>
       <div>
-        <h3>Obsidian 스타일 지식 그래프</h3>
-        <div style="position:relative;">
-          <canvas id="obsidianGraph" width="420" height="420" style="width:100%; height:auto; aspect-ratio:1/1; border-radius:12px; background:rgba(0,0,0,0.3); cursor:grab; touch-action:none;"></canvas>
-          <div id="graphTooltip" style="position:absolute; display:none; background:rgba(20,20,35,0.95); border:1px solid rgba(124,58,237,0.3); border-radius:8px; padding:6px 12px; font-size:0.75rem; color:#e2e8f0; pointer-events:none; white-space:nowrap; z-index:10;"></div>
+        <h3>지식 그래프 (Obsidian 스타일)</h3>
+        <div class="graph-wrap">
+          <canvas id="obsidianGraph" width="420" height="420"></canvas>
+          <div id="graphTooltip" style="position:absolute; display:none; background:#ffffff; border:1px solid rgba(79,70,229,0.2); border-radius:8px; padding:6px 12px; font-size:0.75rem; color:#1e293b; pointer-events:none; white-space:nowrap; z-index:10; box-shadow:0 4px 12px rgba(0,0,0,0.1);"></div>
         </div>
         <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#818cf8;display:inline-block;"></span> 공고</span>
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#34d399;display:inline-block;"></span> NCS 분류</span>
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#facc15;display:inline-block;"></span> 기관</span>
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#f472b6;display:inline-block;"></span> 역량</span>
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:rgba(255,255,255,0.3);"><span style="width:10px;height:10px;border-radius:50%;background:#fb923c;display:inline-block;"></span> 지역/기타</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#4f46e5;display:inline-block;"></span> 공고</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#059669;display:inline-block;"></span> NCS 분류</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#a16207;display:inline-block;"></span> 기관</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#db2777;display:inline-block;"></span> 역량</span>
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#ea580c;display:inline-block;"></span> 지역/기타</span>
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-num">12 / 20</div>
+  <div class="slide-num">12 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -774,20 +777,20 @@ a0d16def Update PROJECT_CHANGELOG.md
     <div class="badge">04. 구현 결과</div>
     <h2>매칭 엔진 데모</h2>
     <div class="highlight-box" style="margin-top:20px;">
-      <div class="big2">사용자 프로필 입력 → AI 분석 → Top-5 추천</div>
+      <div class="big2" style="color:#1e293b;">사용자 프로필 입력 → AI 분석 → Top-5 추천</div>
     </div>
     <div style="margin-top:20px;">
       <div class="card" style="text-align:left;">
         <div style="font-weight:600; margin-bottom:8px;">👤 사용자 프로필 예시</div>
-        <div style="font-size:0.9rem; color:rgba(255,255,255,0.5);">
+        <div style="font-size:0.9rem; color:#64748b;">
           전공: 의공학 · 관심: 의료기기/데이터분석 · 경력: 인턴 6개월 · 희망지역: 대전/충청
         </div>
       </div>
       <div style="display:flex; align-items:center; justify-content:center; margin:16px 0; gap:8px;">
-        <span class="tag tag-blue">LLM 키워드 추출</span>
-        <span style="color:rgba(255,255,255,0.15);">→</span>
+        <span class="tag tag-blue">OpenCode Go API</span>
+        <span style="color:#cbd5e1;">→</span>
         <span class="tag tag-purple">온톨로지 매칭</span>
-        <span style="color:rgba(255,255,255,0.15);">→</span>
+        <span style="color:#cbd5e1;">→</span>
         <span class="tag tag-green">Top-5 추천</span>
       </div>
       <div class="card" style="text-align:left;">
@@ -803,7 +806,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">13 / 20</div>
+  <div class="slide-num">13 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -818,20 +821,20 @@ a0d16def Update PROJECT_CHANGELOG.md
         <h3>수집 파이프라인 안정성</h3>
         <div class="card" style="margin-bottom:12px;">
           <div style="display:flex; justify-content:space-between;">
-            <span style="color:rgba(255,255,255,0.5);">자동 수집 주기</span>
+            <span style="color:#64748b;">자동 수집 주기</span>
             <span style="font-weight:600;">매주 월요일 09:00 KST</span>
           </div>
         </div>
         <div class="card" style="margin-bottom:12px;">
           <div style="display:flex; justify-content:space-between;">
-            <span style="color:rgba(255,255,255,0.5);">수집 성공률</span>
-            <span style="font-weight:600; color:#34d399;">~99%</span>
+            <span style="color:#64748b;">수집 성공률</span>
+            <span style="font-weight:600; color:#059669;">~99%</span>
           </div>
         </div>
         <div class="card">
           <div style="display:flex; justify-content:space-between;">
-            <span style="color:rgba(255,255,255,0.5);">연속 무중단 운영</span>
-            <span style="font-weight:600;">24주+</span>
+            <span style="color:#64748b;">연속 무중단 운영</span>
+            <span style="font-weight:600;">3주+</span>
           </div>
         </div>
       </div>
@@ -839,20 +842,20 @@ a0d16def Update PROJECT_CHANGELOG.md
         <h3>매칭 정확도</h3>
         <div class="card" style="margin-bottom:12px;">
           <div style="display:flex; justify-content:space-between;">
-            <span style="color:rgba(255,255,255,0.5);">키워드 매칭 정밀도</span>
-            <span style="font-weight:600; color:#34d399;">85%+</span>
+            <span style="color:#64748b;">키워드 매칭 정밀도</span>
+            <span style="font-weight:600; color:#059669;">85%+</span>
           </div>
         </div>
         <div class="card" style="margin-bottom:12px;">
           <div style="display:flex; justify-content:space-between;">
-            <span style="color:rgba(255,255,255,0.5);">LLM 추출 정확도</span>
-            <span style="font-weight:600; color:#facc15;">78%</span>
+            <span style="color:#64748b;">LLM 추출 정확도</span>
+            <span style="font-weight:600; color:#a16207;">78%</span>
           </div>
         </div>
         <div class="card">
           <div style="display:flex; justify-content:space-between;">
-            <span style="color:rgba(255,255,255,0.5);">평균 응답 시간</span>
-            <span style="font-weight:600; color:#34d399;">2.3초</span>
+            <span style="color:#64748b;">평균 응답 시간</span>
+            <span style="font-weight:600; color:#059669;">2.3초</span>
           </div>
         </div>
       </div>
@@ -861,31 +864,31 @@ a0d16def Update PROJECT_CHANGELOG.md
       <div class="title">📊 리팩토링 효과 (Phase 1 → Phase 2 비교)</div>
       <div style="display:flex; gap:24px; justify-content:center; margin-top:8px;">
         <div style="text-align:center;">
-          <div style="font-size:0.8rem; color:#f87171;">Before</div>
-          <div style="font-size:1.4rem; font-weight:700; color:#f87171;">100%</div>
-          <div style="font-size:0.7rem; color:rgba(255,255,255,0.3);">Input Token</div>
+          <div style="font-size:0.8rem; color:#dc2626;">Before</div>
+          <div style="font-size:1.4rem; font-weight:700; color:#dc2626;">100%</div>
+          <div style="font-size:0.7rem; color:#94a3b8;">Input Token</div>
         </div>
-        <div style="display:flex; align-items:center; color:rgba(255,255,255,0.15);">→</div>
+        <div style="display:flex; align-items:center; color:#cbd5e1;">→</div>
         <div style="text-align:center;">
-          <div style="font-size:0.8rem; color:#34d399;">After</div>
-          <div style="font-size:1.4rem; font-weight:700; color:#34d399;">40%</div>
-          <div style="font-size:0.7rem; color:rgba(255,255,255,0.3);">Token 사용량</div>
+          <div style="font-size:0.8rem; color:#059669;">After</div>
+          <div style="font-size:1.4rem; font-weight:700; color:#059669;">40%</div>
+          <div style="font-size:0.7rem; color:#94a3b8;">Token 사용량</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-num">14 / 20</div>
+  <div class="slide-num">14 / 19</div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 15: IMPROVEMENT -->
+<!-- SLIDE 15: COMPARISON -->
 <!-- ============================== -->
 <section class="slide" id="s15">
   <div class="content-narrow">
     <div class="badge">05. 실험 및 검증</div>
     <h2>개선 전후 비교</h2>
     <table style="margin-top:16px;">
-      <tr><th>항목</th><th style="color:#f87171;">Before (CrewAI)</th><th style="color:#34d399;">After (자체 구현)</th><th>개선율</th></tr>
+      <tr><th>항목</th><th style="color:#dc2626;">Before (CrewAI)</th><th style="color:#059669;">After (자체 구현)</th><th>개선율</th></tr>
       <tr>
         <td>Input Token</td><td>100%</td><td>40%</td><td><span class="tag tag-green">-60%</span></td>
       </tr>
@@ -911,7 +914,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">15 / 20</div>
+  <div class="slide-num">15 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -920,62 +923,62 @@ a0d16def Update PROJECT_CHANGELOG.md
 <section class="slide" id="s16">
   <div class="content-narrow">
     <div class="badge">06. 시스템 사고</div>
-    <h2>9 Windows 분석</h2>
+    <h2>9 Windows 분석 — job_wiki 바라보기</h2>
     <div class="highlight-box" style="margin-bottom:16px;">
-      <div class="big2">하나의 시스템을 시간과 계층으로 바라보기</div>
+      <div class="big2" style="color:#1e293b;">하나의 시스템을 시간 축(x)과 계층 축(y)으로 바라보기</div>
     </div>
     <div class="grid-9">
-      <div class="header">시스템 \ 시간</div>
-      <div class="header">과거</div>
-      <div class="header">현재</div>
-      <div class="header" style="border-bottom:1px solid rgba(79,70,229,0.2);">미래</div>
-      <div class="header">상위 시스템</div>
-      <div>수기로 공고 확인</div>
-      <div class="highlight">ALIO API</div>
-      <div>AI 자동 매칭</div>
-      <div class="header">시스템</div>
-      <div>채용공고 모음집</div>
-      <div class="highlight" style="background:rgba(124,58,237,0.15); border-color:rgba(124,58,237,0.35);">🌟 job_wiki</div>
-      <div>개인화 대시보드</div>
-      <div class="header">하위 시스템</div>
-      <div>PDF / 엑셀 파일</div>
-      <div class="highlight">Facet Wiki</div>
-      <div>실시간 업데이트</div>
+      <div class="header">계층 \ 시간</div>
+      <div class="header" style="border-right:1px solid rgba(79,70,229,0.1);">과거</div>
+      <div class="header" style="border-right:1px solid rgba(79,70,229,0.1);">현재</div>
+      <div class="header">미래</div>
+      <div class="header">상위 시스템<br><span style="font-weight:300;font-size:0.7rem;color:#94a3b8;">(채용 생태계)</span></div>
+      <div>수기 공고 확인<br>개인별 취업 사이트 탐색</div>
+      <div class="highlight">ALIO API + job_wiki<br>자동 수집 · 매칭</div>
+      <div>AI 개인 비서<br>전 채널 통합 매칭</div>
+      <div class="header">시스템<br><span style="font-weight:300;font-size:0.7rem;color:#94a3b8;">(job_wiki)</span></div>
+      <div>CrewAI 기반<br>과도한 추상화</div>
+      <div class="highlight" style="background:rgba(79,70,229,0.1); border-color:#4f46e5; font-weight:600;">🌟 Facet Wiki<br>+ LLM 매칭</div>
+      <div>Vector DB + Wiki<br>하이브리드 검색</div>
+      <div class="header">하위 시스템<br><span style="font-weight:300;font-size:0.7rem;color:#94a3b8;">(데이터 저장)</span></div>
+      <div>임베딩(Vector DB)<br>→ 유사도만 제공</div>
+      <div class="highlight">Facet Index +<br>Obsidian Wiki</div>
+      <div>실시간 업데이트<br>사용자 피드백 반영</div>
     </div>
-    <div style="margin-top:16px; font-size:0.85rem; color:rgba(255,255,255,0.4); text-align:center;">
-      → 현재 <strong>job_wiki</strong>는 ALIO API와 Facet Wiki를 연결하는<br>
-      중간 다리 역할을 수행하며, 미래에는 개인화 대시보드로 발전 가능
+    <div style="margin-top:16px; font-size:0.85rem; color:#64748b; text-align:center;">
+      🔍 시간에 따른 <strong>채용 생태계 → job_wiki → 데이터 저장</strong> 계층별 진화 과정<br>
+      임베딩의 한계를 인지하고 Wiki 방식으로 전환한 의사결정이 핵심
     </div>
   </div>
-  <div class="slide-num">16 / 20</div>
+  <div class="slide-num">16 / 19</div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 17: RISK MANAGEMENT -->
+<!-- SLIDE 17: RISK -->
 <!-- ============================== -->
 <section class="slide" id="s17">
   <div class="content-narrow">
     <div class="badge">07. 리스크 관리</div>
     <h2>식별된 리스크 및 대응</h2>
     <table style="margin-top:16px;">
-      <tr><th>리스크</th><th>영향</th><th>발생 확률</th><th>대응 전략</th></tr>
+      <tr><th>리스크</th><th>영향</th><th>확률</th><th>대응 전략</th></tr>
       <tr>
-        <td>🔌 ALIO API 변경/중단</td>
+        <td>🔌 ALIO API 변경</td>
         <td>수집 불가</td>
         <td><span class="tag tag-yellow">중</span></td>
         <td>모의 모드 + JSON 캐싱 + 로깅</td>
       </tr>
       <tr>
-        <td>💰 LLM API 비용 초과</td>
+        <td>💰 LLM 비용 초과</td>
         <td>매칭 중단</td>
         <td><span class="tag tag-green">낮음</span></td>
-        <td>Groq 폴백 → 비용 0원 유지</td>
+        <td>OpenCode Go API (로컬) + Groq(0원)</td>
       </tr>
       <tr>
-        <td>👤 3인 팀 (역할 집중)</td>
+        <td>👤 3인 팀</td>
         <td>병목 현상</td>
         <td><span class="tag tag-yellow">중</span></td>
-        <td>모듈별 독립 설계, 명확한 역할 분담</td>
+        <td>모듈별 독립 설계, 역할 분담 명확화</td>
       </tr>
       <tr>
         <td>⏱️ 15주 일정</td>
@@ -992,7 +995,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">17 / 20</div>
+  <div class="slide-num">17 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -1004,9 +1007,9 @@ a0d16def Update PROJECT_CHANGELOG.md
     <h2>팀원별 역할 및 기여</h2>
     <div class="split" style="margin-top:16px;">
       <div>
-        <div class="card" style="margin-bottom:12px; border-left:3px solid #818cf8;">
+        <div class="card" style="margin-bottom:12px; border-left:3px solid #4f46e5;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-weight:700; color:#818cf8;">강현모</span>
+            <span style="font-weight:700; color:#4f46e5;">강현모</span>
             <span class="tag tag-blue">백엔드</span>
           </div>
           <ul style="margin-top:8px; font-size:0.85rem;">
@@ -1016,9 +1019,9 @@ a0d16def Update PROJECT_CHANGELOG.md
             <li>매칭 엔진 알고리즘 개발</li>
           </ul>
         </div>
-        <div class="card" style="border-left:3px solid #34d399;">
+        <div class="card" style="border-left:3px solid #059669;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-weight:700; color:#34d399;">양병현</span>
+            <span style="font-weight:700; color:#059669;">양병현</span>
             <span class="tag tag-green">프론트엔드</span>
           </div>
           <ul style="margin-top:8px; font-size:0.85rem;">
@@ -1027,9 +1030,9 @@ a0d16def Update PROJECT_CHANGELOG.md
             <li>server.py 연동</li>
           </ul>
         </div>
-        <div class="card" style="margin-top:12px; border-left:3px solid #facc15;">
+        <div class="card" style="margin-top:12px; border-left:3px solid #a16207;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-weight:700; color:#facc15;">권오규</span>
+            <span style="font-weight:700; color:#a16207;">권오규</span>
             <span class="tag tag-yellow">QA</span>
           </div>
           <ul style="margin-top:8px; font-size:0.85rem;">
@@ -1041,30 +1044,30 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
       <div>
         <h3>GitHub 증빙</h3>
-        <div class="card" style="background:rgba(0,0,0,0.2);">
+        <div class="card" style="background:#f8fafc;">
           <div style="font-size:0.8rem;">
             <div style="display:flex; justify-content:space-between; padding:4px 0;">
-              <span style="color:rgba(255,255,255,0.3);">Repository</span>
-              <span>khmo31/job_wiki</span>
+              <span style="color:#94a3b8;">Repository</span>
+              <span style="color:#1e293b;">khmo31/job_wiki</span>
             </div>
             <div style="display:flex; justify-content:space-between; padding:4px 0;">
-              <span style="color:rgba(255,255,255,0.3);">Commits</span>
-              <span>20+</span>
+              <span style="color:#94a3b8;">Commits</span>
+              <span style="color:#1e293b;">20+</span>
             </div>
             <div style="display:flex; justify-content:space-between; padding:4px 0;">
-              <span style="color:rgba(255,255,255,0.3);">CI/CD</span>
-              <span>GitHub Actions</span>
+              <span style="color:#94a3b8;">CI/CD</span>
+              <span style="color:#1e293b;">GitHub Actions</span>
             </div>
             <div style="display:flex; justify-content:space-between; padding:4px 0;">
-              <span style="color:rgba(255,255,255,0.3);">Changelog</span>
-              <span>PROJECT_CHANGELOG.md</span>
+              <span style="color:#94a3b8;">Changelog</span>
+              <span style="color:#1e293b;">PROJECT_CHANGELOG.md</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-num">18 / 20</div>
+  <div class="slide-num">18 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -1080,10 +1083,10 @@ a0d16def Update PROJECT_CHANGELOG.md
         <div class="card-title">사용자 피드백 루프</div>
         <div class="card-text">매칭 결과에 대한 사용자 평가 → 모델 개선</div>
       </div>
-      <div class="card">
+      <div class="card" style="border-color:rgba(79,70,229,0.2);">
         <div style="font-size:1.5rem; margin-bottom:8px;">🏢</div>
-        <div class="card-title">민간기업 통합</div>
-        <div class="card-text">사람인, 잡코리아 API 연동 → 데이터 범위 확장</div>
+        <div class="card-title">사람인·잡코리아 통합 <span class="tag tag-purple">NEW</span></div>
+        <div class="card-text">사기업 채용공고 API 연동 → 공공+민간 통합 매칭</div>
       </div>
       <div class="card">
         <div style="font-size:1.5rem; margin-bottom:8px;">🔌</div>
@@ -1093,58 +1096,29 @@ a0d16def Update PROJECT_CHANGELOG.md
       <div class="card">
         <div style="font-size:1.5rem; margin-bottom:8px;">📄</div>
         <div class="card-title">PDF 리포트 자동 생성</div>
-        <div class="card-text">매칭 결과를 PDF로 출력 → 이력서 보조 자료</div>
-      </div>
-      <div class="card">
-        <div style="font-size:1.5rem; margin-bottom:8px;">🌐</div>
-        <div class="card-title">다국어 지원</div>
-        <div class="card-text">영문 공고 매칭으로 확장</div>
+        <div class="card-text">매칭 결과를 PDF로 출력</div>
       </div>
       <div class="card">
         <div style="font-size:1.5rem; margin-bottom:8px;">📊</div>
-        <div class="card-title">데이터 시각화</div>
-        <div class="card-text">채용 트렌드 분석 대시보드</div>
+        <div class="card-title">Vector DB + Wiki 하이브리드</div>
+        <div class="card-text">임베딩 검색 + Facet Wiki 구조화 병행</div>
+      </div>
+      <div class="card">
+        <div style="font-size:1.5rem; margin-bottom:8px;">🌐</div>
+        <div class="card-title">실시간 알림</div>
+        <div class="card-text">신규 맞춤 공고 등록 시 푸시 알림</div>
       </div>
     </div>
     <div class="highlight-box" style="margin-top:20px;">
-      <div class="title">🎯 단기 목표</div>
-      <div class="text">사용자 피드백 루프 구축 → 매칭 정확도 90%+ 달성</div>
+      <div class="title">🔮 확장 가능성</div>
+      <div class="text">
+        현재는 <strong>공공기관(ALIO)</strong>에 한정되어 있지만,<br>
+        사람인·잡코리아 등 <strong>사기업 채용정보 API</strong>를 추가로 연동하면<br>
+        <strong>공공 + 민간 통합 채용 매칭 플랫폼</strong>으로 확장 가능
+      </div>
     </div>
   </div>
-  <div class="slide-num">19 / 20</div>
-</section>
-
-<!-- ============================== -->
-<!-- SLIDE 20: Q&A -->
-<!-- ============================== -->
-<section class="slide" id="s20">
-  <div class="content-narrow center-text">
-    <div style="font-size:3rem; margin-bottom:16px;">🙋</div>
-    <h1>Q&A</h1>
-    <div class="subtitle" style="margin-bottom:32px;">예상 질문과 답변</div>
-    <div style="text-align:left; max-width:600px; margin:0 auto;">
-      <div class="qa-item">
-        <div class="qa-q">Q. 왜 CrewAI를 버렸나요?</div>
-        <div class="qa-a">A. Over-engineering이었습니다. 단순한 파이프라인에 Multi-Agent 프레임워크는 불필요한 복잡성을 추가했습니다. 자체 LLM 클라이언트로 교체 후 Token 60%를 절감했고, 디버깅이 훨씬 쉬워졌습니다.</div>
-      </div>
-      <div class="qa-item">
-        <div class="qa-q">Q. 기존 채용 플랫폼과의 차별점은?</div>
-        <div class="qa-a">A. 단순 키워드 검색이 아닌, ALIO API 원문 데이터를 NCS 기반 온톨로지로 구조화하여 공고 간 관계까지 분석합니다. Obsidian Wiki를 통한 지식 그래프 연결이 핵심입니다.</div>
-      </div>
-      <div class="qa-item">
-        <div class="qa-q">Q. 가장 어려웠던 점은?</div>
-        <div class="qa-a">A. 초기에 '완벽한' 아키텍처를 고집하다 시간을 낭비한 점입니다. 이후 "일단 동작하는 최소 버전(MVP)"을 먼저 만들고 점진적으로 개선하는 방식으로 전환하면서 프로젝트가 탄력을 받았습니다.</div>
-      </div>
-      <div class="qa-item">
-        <div class="qa-q">Q. 이 프로젝트를 통해 배운 점은?</div>
-        <div class="qa-a">A. 공학 설계에서 가장 중요한 것은 "문제를 정확히 정의하는 것"과 "과정에서 배우는 것"입니다. 처음에 5Whys로 진짜 문제를 찾아낸 과정과, CrewAI 실패에서 배운 교훈이 가장 값진 경험이었습니다.</div>
-      </div>
-    </div>
-    <div style="margin-top:32px; font-size:0.9rem; color:rgba(255,255,255,0.2);">
-      감사합니다 🙏
-    </div>
-  </div>
-  <div class="slide-num">20 / 20</div>
+  <div class="slide-num">19 / 19</div>
 </section>
 
 <!-- Navigation dots -->
@@ -1208,9 +1182,10 @@ document.addEventListener('keydown', (e) => {
   if (!canvas) return;
   const tooltip = document.getElementById('graphTooltip');
   const ctx = canvas.getContext('2d');
-  let W = canvas.width, H = canvas.height;
-  
-  // Graph data
+  canvas.width = 420; canvas.height = 420;
+  const W = 420, H = 420;
+  const center = {x:W/2, y:H/2};
+
   const nodes = [
     { id:'u1', label:'👤 사용자\n경험/흥미', group:'user', r:20 },
     { id:'p1', label:'📄 충남대병원\n의료기기연구', group:'post', r:16 },
@@ -1229,7 +1204,7 @@ document.addEventListener('keydown', (e) => {
     { id:'c2', label:'🏥 분당서울\n대병원', group:'company', r:15 },
     { id:'c3', label:'🏥 부산대\n병원', group:'company', r:15 },
   ];
-  
+
   const edges = [
     {s:'u1',t:'s2'},{s:'u1',t:'s3'},
     {s:'p1',t:'n1'},{s:'p1',t:'r1'},{s:'p1',t:'s1'},{s:'p1',t:'s2'},{s:'p1',t:'c1'},
@@ -1238,13 +1213,10 @@ document.addEventListener('keydown', (e) => {
     {s:'n1',t:'s2'},{s:'n2',t:'s3'},{s:'n3',t:'s2'},
     {s:'c1',t:'r1'},{s:'c2',t:'r2'},{s:'c3',t:'r3'},
   ];
-  
-  const colors = { user:'#a78bfa', post:'#818cf8', ncs:'#34d399', region:'#fb923c', skill:'#f472b6', company:'#facc15' };
-  
-  // Physics
-  let dragNode = null, dragOff = {x:0,y:0};
-  const center = {x:W/2,y:H/2};
-  
+
+  const colors = { user:'#4f46e5', post:'#4f46e5', ncs:'#059669', region:'#ea580c', skill:'#db2777', company:'#a16207' };
+
+  let dragNode = null;
   function initPositions() {
     nodes.forEach((n,i) => {
       const angle = (i/nodes.length)*Math.PI*2;
@@ -1255,169 +1227,113 @@ document.addEventListener('keydown', (e) => {
     });
   }
   initPositions();
-  
+
   function simulate() {
-    const repel = 6000, attract = 0.005, damping = 0.85, minDist = 30;
-    // Reset forces
+    const repel = 6000, attract = 0.005, damping = 0.85;
     nodes.forEach(n => { n.fx = 0; n.fy = 0; });
-    // Repulsion between all nodes
     for(let i=0;i<nodes.length;i++) {
       for(let j=i+1;j<nodes.length;j++) {
-        let dx = nodes[j].x - nodes[i].x;
-        let dy = nodes[j].y - nodes[i].y;
+        let dx = nodes[j].x - nodes[i].x, dy = nodes[j].y - nodes[i].y;
         let dist = Math.sqrt(dx*dx+dy*dy) + 1;
         let force = repel / (dist*dist);
-        let fx = (dx/dist)*force;
-        let fy = (dy/dist)*force;
+        let fx = (dx/dist)*force, fy = (dy/dist)*force;
         nodes[i].fx -= fx; nodes[i].fy -= fy;
         nodes[j].fx += fx; nodes[j].fy += fy;
       }
     }
-    // Attraction along edges
     edges.forEach(e => {
-      let a = nodes.find(n=>n.id===e.s);
-      let b = nodes.find(n=>n.id===e.t);
+      let a = nodes.find(n=>n.id===e.s), b = nodes.find(n=>n.id===e.t);
       if(!a||!b) return;
-      let dx = b.x - a.x;
-      let dy = b.y - a.y;
+      let dx = b.x - a.x, dy = b.y - a.y;
       let dist = Math.sqrt(dx*dx+dy*dy) + 1;
       let force = (dist - 120) * attract;
-      let fx = (dx/dist)*force;
-      let fy = (dy/dist)*force;
-      a.fx += fx; a.fy += fy;
-      b.fx -= fx; b.fy -= fy;
+      let fx = (dx/dist)*force, fy = (dy/dist)*force;
+      a.fx += fx; a.fy += fy; b.fx -= fx; b.fy -= fy;
     });
-    // Center gravity
     nodes.forEach(n => {
-      n.fx += (center.x - n.x) * 0.001;
-      n.fy += (center.y - n.y) * 0.001;
+      n.fx += (center.x - n.x) * 0.001; n.fy += (center.y - n.y) * 0.001;
     });
-    // Apply forces
     nodes.forEach(n => {
       if(n === dragNode) return;
-      n.vx = (n.vx + n.fx) * damping;
-      n.vy = (n.vy + n.fy) * damping;
-      n.x += n.vx;
-      n.y += n.vy;
-      // Keep in bounds
-      n.x = Math.max(30, Math.min(W-30, n.x));
-      n.y = Math.max(30, Math.min(H-30, n.y));
+      n.vx = (n.vx + n.fx) * damping; n.vy = (n.vy + n.fy) * damping;
+      n.x += n.vx; n.y += n.vy;
+      n.x = Math.max(30, Math.min(W-30, n.x)); n.y = Math.max(30, Math.min(H-30, n.y));
     });
   }
-  
+
   function draw() {
     ctx.clearRect(0,0,W,H);
+    // Background subtle grid
+    ctx.strokeStyle = 'rgba(79,70,229,0.03)'; ctx.lineWidth = 1;
+    for(let i=0;i<W;i+=30){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,H);ctx.stroke();}
+    for(let i=0;i<H;i+=30){ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(W,i);ctx.stroke();}
     // Edges
     edges.forEach(e => {
-      let a = nodes.find(n=>n.id===e.s);
-      let b = nodes.find(n=>n.id===e.t);
+      let a = nodes.find(n=>n.id===e.s), b = nodes.find(n=>n.id===e.t);
       if(!a||!b) return;
-      ctx.beginPath();
-      ctx.moveTo(a.x,a.y);
-      ctx.lineTo(b.x,b.y);
-      ctx.strokeStyle = 'rgba(124,58,237,0.15)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle = 'rgba(79,70,229,0.12)'; ctx.lineWidth = 1; ctx.stroke();
     });
-    // Edges from user (highlighted)
+    // User edges highlighted
     edges.filter(e=>e.s==='u1').forEach(e => {
       let b = nodes.find(n=>n.id===e.t);
       if(!b) return;
-      ctx.beginPath();
-      ctx.moveTo(nodes[0].x,nodes[0].y);
-      ctx.lineTo(b.x,b.y);
-      ctx.strokeStyle = 'rgba(167,139,250,0.3)';
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(nodes[0].x,nodes[0].y); ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle = 'rgba(79,70,229,0.25)'; ctx.lineWidth = 1.5; ctx.stroke();
     });
     // Nodes
     nodes.forEach(n => {
       const col = colors[n.group] || '#666';
-      // Glow
       const grad = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*2);
-      grad.addColorStop(0,col+'40');
-      grad.addColorStop(1,'transparent');
+      grad.addColorStop(0,col+'20'); grad.addColorStop(1,'transparent');
       ctx.beginPath(); ctx.arc(n.x,n.y,n.r*2,0,Math.PI*2);
       ctx.fillStyle = grad; ctx.fill();
-      // Circle
       ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle = col+'30';
-      ctx.strokeStyle = col;
-      ctx.lineWidth = n===dragNode?2.5:1.5;
-      ctx.fill(); ctx.stroke();
-      // Label
-      const lines = n.label.split('\n');
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
+      ctx.fillStyle = col+'15'; ctx.strokeStyle = col;
+      ctx.lineWidth = n===dragNode?2.5:1.5; ctx.fill(); ctx.stroke();
+      const lines = n.label.split('\n'); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       lines.forEach((line,i) => {
-        ctx.fillStyle = n===dragNode?'#e2e8f0':'rgba(255,255,255,0.7)';
+        ctx.fillStyle = n===dragNode?'#1e293b':'#475569';
         ctx.font = i===0?'500 9px Noto Sans KR, sans-serif':'400 8px Noto Sans KR, sans-serif';
         ctx.fillText(line, n.x, n.y + (i - (lines.length-1)/2)*13);
       });
     });
   }
-  
-  let animId = null;
-  function loop() {
-    simulate();
-    draw();
-    animId = requestAnimationFrame(loop);
-  }
+
+  function loop(){ simulate(); draw(); requestAnimationFrame(loop); }
   loop();
-  
-  // Mouse/Touch interaction
+
   function getPos(e) {
     const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+    const scaleX = canvas.width / rect.width, scaleY = canvas.height / rect.height;
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: (cx - rect.left) * scaleX, y: (cy - rect.top) * scaleY };
   }
-  
   function onDown(e) {
-    e.preventDefault();
-    const pos = getPos(e);
-    let hit = null;
+    e.preventDefault(); const pos = getPos(e); let hit = null;
     for(let i=nodes.length-1;i>=0;i--) {
-      const n = nodes[i];
-      const dx = pos.x - n.x, dy = pos.y - n.y;
-      if(dx*dx + dy*dy < (n.r+10)*(n.r+10)) { hit = n; break; }
+      const n = nodes[i], dx = pos.x-n.x, dy = pos.y-n.y;
+      if(dx*dx+dy*dy < (n.r+10)*(n.r+10)) { hit = n; break; }
     }
     if(hit) { dragNode = hit; canvas.style.cursor = 'grabbing'; }
   }
   function onMove(e) {
-    e.preventDefault();
-    const pos = getPos(e);
-    if(dragNode) {
-      dragNode.x = pos.x; dragNode.y = pos.y;
-      dragNode.vx = 0; dragNode.vy = 0;
-    }
-    // Hover tooltip
+    e.preventDefault(); const pos = getPos(e);
+    if(dragNode) { dragNode.x = pos.x; dragNode.y = pos.y; dragNode.vx = 0; dragNode.vy = 0; }
     let hover = null;
     for(let i=nodes.length-1;i>=0;i--) {
-      const n = nodes[i];
-      const dx = pos.x - n.x, dy = pos.y - n.y;
-      if(dx*dx + dy*dy < (n.r+15)*(n.r+15)) { hover = n; break; }
+      const n = nodes[i], dx = pos.x-n.x, dy = pos.y-n.y;
+      if(dx*dx+dy*dy < (n.r+15)*(n.r+15)) { hover = n; break; }
     }
     if(hover) {
       tooltip.style.display = 'block';
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = rect.width / canvas.width;
-      const scaleY = rect.height / canvas.height;
-      tooltip.style.left = (hover.x * scaleX + 15) + 'px';
-      tooltip.style.top = (hover.y * scaleY - 10) + 'px';
+      const rect = canvas.getBoundingClientRect(), sx = rect.width/canvas.width, sy = rect.height/canvas.height;
+      tooltip.style.left = (hover.x*sx+15)+'px'; tooltip.style.top = (hover.y*sy-10)+'px';
       tooltip.textContent = hover.label.replace('\n',' - ');
-    } else {
-      tooltip.style.display = 'none';
-    }
+    } else { tooltip.style.display = 'none'; }
   }
-  function onUp(e) {
-    e.preventDefault();
-    dragNode = null;
-    canvas.style.cursor = 'grab';
-  }
-  
+  function onUp(e) { e.preventDefault(); dragNode = null; canvas.style.cursor = 'grab'; }
   canvas.addEventListener('mousedown', onDown);
   canvas.addEventListener('mousemove', onMove);
   canvas.addEventListener('mouseup', onUp);
@@ -1425,21 +1341,6 @@ document.addEventListener('keydown', (e) => {
   canvas.addEventListener('touchstart', onDown, {passive:false});
   canvas.addEventListener('touchmove', onMove, {passive:false});
   canvas.addEventListener('touchend', onUp);
-  
-  // Resize handler
-  function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    W = canvas.width; H = canvas.height;
-    center.x = W/2; center.y = H/2;
-    ctx.scale(dpr, dpr);
-  }
-  // Just use the CSS-defined size
-  canvas.width = 420; canvas.height = 420;
-  W = 420; H = 420;
-  center.x = W/2; center.y = H/2;
 })();
 </script>
 
