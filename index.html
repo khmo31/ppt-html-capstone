@@ -270,7 +270,7 @@
       <div style="margin-top:20px; font-size:0.85rem; color:#94a3b8;">12조 · 캡스톤프로젝트 · 2026-1</div>
     </div>
   </div>
-  <div class="slide-num">01 / 19</div>
+  <div class="slide-num">01 / 18</div>
   <div class="scroll-hint">↓ 스크롤</div>
 </section>
 
@@ -316,7 +316,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">02 / 19</div>
+  <div class="slide-num">02 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -360,7 +360,7 @@
       <div class="text">"자신의 진로를 명확히 탐색하지 못한 사용자가 본인의 경험 및 흥미를 비정형적으로 작성하면,<br>그걸 바탕으로 맞춤형 채용 공고를 추천해주는 시스템을 개발하자"</div>
     </div>
   </div>
-  <div class="slide-num">03 / 19</div>
+  <div class="slide-num">03 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -402,7 +402,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">04 / 19</div>
+  <div class="slide-num">04 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -454,7 +454,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">05 / 19</div>
+  <div class="slide-num">05 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -497,51 +497,71 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">06 / 19</div>
+  <div class="slide-num">06 / 18</div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 7: STEP 3 DETAIL - UPDATED LLM -->
+<!-- SLIDE 7: EXTRACTION & MATCHING DETAIL -->
 <!-- ============================== -->
 <section class="slide" id="s7">
   <div class="content">
-    <div class="badge">02. 시스템 설계</div>
-    <h2>매칭 엔진 상세</h2>
-    <div class="split" style="margin-top:16px;">
+    <div class="badge">⭐ 02. 시스템 설계 — 핵심</div>
+    <h2>역량 추출 → 기업 매칭: Input → Process → Output</h2>
+    <div class="split" style="margin-top:12px;">
       <div>
-        <h3>매칭 프로세스</h3>
-        <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:16px;">
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06);">👤 사용자 프로필 입력</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06);">↓</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06); color:#4f46e5;">LLM 키워드 추출 (<strong>OpenCode Go API</strong>)</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06);">↓</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06); color:#7c3aed;">OntologyCheck → 표준 키워드 정규화</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06);">↓</div>
-          <div style="text-align:center; padding:6px 0; border-bottom:1px solid rgba(0,0,0,0.06); color:#059669;">Wiki_Index 검색 → 유사도 점수화</div>
-          <div style="text-align:center; padding:6px 0;">↓</div>
-          <div style="text-align:center; padding:6px 0; font-weight:600; color:#a16207;">🏆 Top-5 기관 추천</div>
+        <h3>1️⃣ 역량 추출 (LLM → Ontology)</h3>
+        <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
+          <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">INPUT: 사용자 비정형 경험</div>
+          <code style="font-size:0.75rem;">"의공학 전공, 의료기기 인턴 6개월,<br>파이썬 데이터분석 프로젝트 경험"</code>
+        </div>
+        <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
+          <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">PROCESS: LLM 프롬프트 (실제 코드)</div>
+          <pre style="margin:0; font-size:0.65rem; line-height:1.5;"><code># llm_client.py — 키워드 추출 프롬프트
+"""
+당신은 채용공고 분석 전문가입니다.
+사용자 프로필에서 직무 관련 키워드를
+NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
+- ncs: [관련 NCS 분류]
+- skills: [관련 기술/역량]
+- regions: [희망 지역]
+- education: [필요 학력]
+키워드는 최대 15개, Ontology_Map.json의
+표준 키워드를 우선 사용하세요.
+"""</code></pre>
+        </div>
+        <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
+          <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">OntologyCheckTool — 표준 키워드 정규화</div>
+          <code style="font-size:0.75rem;">LLM 출력 ("의료기기" → "보건의료")<br>  ↓<br>_normalize_keyword() — 불필요 문자 제거<br>  ↓<br>Ontology_Map.json 매칭 — 표준 온톨로지 매핑<br>  ↓<br>_deduplicate_preserve_order() — 중복 제거</code>
+        </div>
+        <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px;">
+          <div style="font-weight:600; font-size:0.85rem; color:#059669; margin-bottom:6px;">OUTPUT: 구조화된 키워드 셋</div>
+          <code style="font-size:0.75rem;">{
+  ncs: ["보건의료", "정보통신"],
+  skills: ["의료기기", "데이터분석", "Python"],
+  regions: ["대전", "충청"],
+  education: ["석사"],
+  hire_type: ["정규직"]
+}</code>
         </div>
       </div>
       <div>
-        <h3>LLM 전략</h3>
-        <div style="font-weight:300; font-size:0.85rem; color:#64748b; margin-bottom:12px;">주력 + 폴백 구조</div>
-        <table>
-          <tr><th>구분</th><th>Provider</th><th>조건</th></tr>
-          <tr><td><span class="tag tag-blue">주력</span></td><td><strong>OpenCode Go API</strong></td><td>일반 매칭 시 항상 사용</td></tr>
-          <tr><td><span class="tag tag-yellow">폴백</span></td><td>Groq (6개 모델)</td><td>API 장애/타임아웃 시 자동 전환</td></tr>
-        </table>
-        <div class="highlight-box" style="margin-top:12px;">
-          <div class="title">🎯 단일 LLM 전략의 장점</div>
-          <div class="text">
-            • 응답 일관성 유지 (동일 모델로 추론)<br>
-            • API 비용 예측 가능<br>
-            • Groq 폴백으로 안정성 확보
-          </div>
+        <h3>2️⃣ 기업 매칭 (가중치 점수화)</h3>
+        <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
+          <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">가중치 정책 (실제 코드)</div>
+          <code style="font-size:0.75rem;">PROFILE_TERM_WEIGHT = 3.0    # 사용자 직접 입력<br>SUPPLEMENTAL_TERM_WEIGHT = 1.0 # LLM 보조 추출<br>MATCH_RATE_THRESHOLD = 50     # 최소 매칭 기준</code>
+        </div>
+        <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
+          <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">점수화 알고리즘</div>
+          <code style="font-size:0.75rem;">1. _build_weighted_scoring_terms()<br>   → 프로필 키워드 × 3.0 + 보조 키워드 × 1.0<br><br>2. Wiki_Index.json 검색<br>   → 각 키워드별 매칭되는 기관/공고 수집<br><br>3. _match_strength_for_entry()<br>   → 기관별 키워드 일치율(%) 계산<br><br>4. _score_index_entries_with_file_scores()<br>   → 가중치 × 일치율 = 최종 점수<br>   → 상위 5개 추천</code>
+        </div>
+        <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px;">
+          <div style="font-weight:600; font-size:0.85rem; color:#059669; margin-bottom:6px;">OUTPUT: Top-5 매칭 결과</div>
+          <code style="font-size:0.75rem;">1. 충남대병원 (의료기기연구) — 92%<br>   매칭: 보건의료✓ 대전✓ 의료기기✓ 석사✓<br>2. 분당서울대병원 (데이터분석) — 88%<br>   매칭: 정보통신✓ 경기✓ 데이터분석✓ 석사✓</code>
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-num">07 / 19</div>
+  <div class="slide-num">07 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -583,7 +603,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">08 / 19</div>
+  <div class="slide-num">08 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -639,7 +659,7 @@
       <span class="tag tag-blue">60% Token 절감</span>
     </div>
   </div>
-  <div class="slide-num">09 / 19</div>
+  <div class="slide-num">09 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -691,7 +711,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </code>
     </div>
   </div>
-  <div class="slide-num">10 / 19</div>
+  <div class="slide-num">10 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -722,7 +742,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">11 / 19</div>
+  <div class="slide-num">11 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -766,7 +786,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">12 / 19</div>
+  <div class="slide-num">12 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -806,7 +826,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">13 / 19</div>
+  <div class="slide-num">13 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -877,7 +897,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">14 / 19</div>
+  <div class="slide-num">14 / 18</div>
 </section>
 
 <!-- ============================== -->
@@ -914,49 +934,13 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">15 / 19</div>
+  <div class="slide-num">15 / 18</div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 16: 9 WINDOWS -->
+<!-- SLIDE 16: RISK -->
 <!-- ============================== -->
 <section class="slide" id="s16">
-  <div class="content-narrow">
-    <div class="badge">06. 시스템 사고</div>
-    <h2>9 Windows 분석 — job_wiki 바라보기</h2>
-    <div class="highlight-box" style="margin-bottom:16px;">
-      <div class="big2" style="color:#1e293b;">하나의 시스템을 시간 축(x)과 계층 축(y)으로 바라보기</div>
-    </div>
-    <div class="grid-9">
-      <div class="header">계층 \ 시간</div>
-      <div class="header" style="border-right:1px solid rgba(79,70,229,0.1);">과거</div>
-      <div class="header" style="border-right:1px solid rgba(79,70,229,0.1);">현재</div>
-      <div class="header">미래</div>
-      <div class="header">상위 시스템<br><span style="font-weight:300;font-size:0.7rem;color:#94a3b8;">(채용 생태계)</span></div>
-      <div>수기 공고 확인<br>개인별 취업 사이트 탐색</div>
-      <div class="highlight">ALIO API + job_wiki<br>자동 수집 · 매칭</div>
-      <div>AI 개인 비서<br>전 채널 통합 매칭</div>
-      <div class="header">시스템<br><span style="font-weight:300;font-size:0.7rem;color:#94a3b8;">(job_wiki)</span></div>
-      <div>CrewAI 기반<br>과도한 추상화</div>
-      <div class="highlight" style="background:rgba(79,70,229,0.1); border-color:#4f46e5; font-weight:600;">🌟 Facet Wiki<br>+ LLM 매칭</div>
-      <div>Vector DB + Wiki<br>하이브리드 검색</div>
-      <div class="header">하위 시스템<br><span style="font-weight:300;font-size:0.7rem;color:#94a3b8;">(데이터 저장)</span></div>
-      <div>임베딩(Vector DB)<br>→ 유사도만 제공</div>
-      <div class="highlight">Facet Index +<br>Obsidian Wiki</div>
-      <div>실시간 업데이트<br>사용자 피드백 반영</div>
-    </div>
-    <div style="margin-top:16px; font-size:0.85rem; color:#64748b; text-align:center;">
-      🔍 시간에 따른 <strong>채용 생태계 → job_wiki → 데이터 저장</strong> 계층별 진화 과정<br>
-      임베딩의 한계를 인지하고 Wiki 방식으로 전환한 의사결정이 핵심
-    </div>
-  </div>
-  <div class="slide-num">16 / 19</div>
-</section>
-
-<!-- ============================== -->
-<!-- SLIDE 17: RISK -->
-<!-- ============================== -->
-<section class="slide" id="s17">
   <div class="content-narrow">
     <div class="badge">07. 리스크 관리</div>
     <h2>식별된 리스크 및 대응</h2>
@@ -995,13 +979,13 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">17 / 19</div>
+  <div class="slide-num">16 / 18</div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 18: CONTRIBUTION -->
+<!-- SLIDE 17: CONTRIBUTION -->
 <!-- ============================== -->
-<section class="slide" id="s18">
+<section class="slide" id="s17">
   <div class="content-narrow">
     <div class="badge">08. 개인 기여도</div>
     <h2>팀원별 역할 및 기여</h2>
@@ -1067,13 +1051,13 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">18 / 19</div>
+  <div class="slide-num">17 / 18</div>
 </section>
 
 <!-- ============================== -->
-<!-- SLIDE 19: FUTURE -->
+<!-- SLIDE 18: FUTURE -->
 <!-- ============================== -->
-<section class="slide" id="s19">
+<section class="slide" id="s18">
   <div class="content-narrow">
     <div class="badge">09. 향후 계획</div>
     <h2>확장성 및 로드맵</h2>
@@ -1118,7 +1102,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">19 / 19</div>
+  <div class="slide-num">18 / 18</div>
 </section>
 
 <!-- Navigation dots -->
