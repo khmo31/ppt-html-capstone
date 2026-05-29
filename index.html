@@ -17,6 +17,21 @@
     overflow-x:hidden;
   }
 
+  /* Section-based backgrounds — 파트별 미묘한 배경 전환 */
+  .slide[data-section="cover"] { background:linear-gradient(160deg, #f5f3ff 0%, #f8fafc 100%); }
+  .slide[data-section="problem"] { background:linear-gradient(160deg, #fef2f2 0%, #f8fafc 100%); }
+  .slide[data-section="design"] { background:linear-gradient(160deg, #eff6ff 0%, #f8fafc 100%); }
+  .slide[data-section="implement"] { background:linear-gradient(160deg, #fffbeb 0%, #f8fafc 100%); }
+  .slide[data-section="result"] { background:linear-gradient(160deg, #f0fdf4 0%, #f8fafc 100%); }
+  .slide[data-section="verify"] { background:linear-gradient(160deg, #faf5ff 0%, #f8fafc 100%); }
+  .slide[data-section="risk"] { background:linear-gradient(160deg, #fff7ed 0%, #f8fafc 100%); }
+  .slide[data-section="contribute"] { background:linear-gradient(160deg, #ecfeff 0%, #f8fafc 100%); }
+  .slide[data-section="future"] { background:linear-gradient(160deg, #fdf2f8 0%, #f8fafc 100%); }
+
+  /* Slide entrance animation */
+  .slide { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease-out, transform 0.7s ease-out; }
+  .slide.visible { opacity:1; transform:translateY(0); }
+
   /* Progress */
   .progress { position:fixed; top:0; left:0; right:0; height:3px; z-index:1000; background:rgba(0,0,0,0.04); }
   .progress-bar {
@@ -79,10 +94,10 @@
   .card-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; margin-top:16px; }
   .card {
     background:#ffffff; border:1px solid rgba(0,0,0,0.06);
-    border-radius:12px; padding:20px; transition:all 0.3s;
-    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+    border-radius:12px; padding:20px; transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    box-shadow:0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   }
-  .card:hover { box-shadow:0 4px 12px rgba(79,70,229,0.08); border-color:rgba(79,70,229,0.15); }
+  .card:hover { box-shadow:0 8px 24px rgba(79,70,229,0.10), 0 2px 6px rgba(79,70,229,0.06); border-color:rgba(79,70,229,0.15); transform:translateY(-2px); }
   .card-icon { font-size:1.8rem; margin-bottom:8px; }
   .card-title { font-weight:600; font-size:0.95rem; margin-bottom:6px; color:#1e293b; }
   .card-text { font-size:0.85rem; color:#64748b; line-height:1.5; }
@@ -156,9 +171,11 @@
   .metric {
     text-align:center; padding:20px 28px; background:#ffffff;
     border:1px solid rgba(0,0,0,0.06); border-radius:12px; min-width:120px;
-    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+    box-shadow:0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
   }
-  .metric-num { font-size:2rem; font-weight:900; color:#4f46e5; }
+  .metric:hover { box-shadow:0 8px 24px rgba(79,70,229,0.10); transform:translateY(-2px); }
+  .metric-num { font-size:2rem; font-weight:900; background:linear-gradient(135deg, #4f46e5, #7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
   .metric-label { font-size:0.8rem; color:#94a3b8; margin-top:4px; }
 
   /* Grid for 9 windows */
@@ -176,7 +193,9 @@
   .highlight-box {
     background:rgba(79,70,229,0.04); border:1px solid rgba(79,70,229,0.12);
     border-radius:12px; padding:20px 24px; margin:16px 0;
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
   }
+  .highlight-box:hover { box-shadow:0 4px 16px rgba(79,70,229,0.08); border-color:rgba(79,70,229,0.2); }
   .highlight-box .title { color:#4f46e5; font-weight:600; margin-bottom:6px; }
   .highlight-box .text { color:#475569; line-height:1.6; font-size:0.95rem; }
   .highlight-box .big {
@@ -245,7 +264,7 @@
 <!-- ============================== -->
 <!-- SLIDE 1: COVER -->
 <!-- ============================== -->
-<section class="slide" id="s1">
+<section class="slide" id="s1" data-section="cover">
   <div class="content center-text">
     <div style="font-size:3rem; margin-bottom:24px;">🏗️</div>
     <h1>job_wiki</h1>
@@ -277,7 +296,7 @@
 <!-- ============================== -->
 <!-- SLIDE 2: PROBLEM BACKGROUND -->
 <!-- ============================== -->
-<section class="slide" id="s2">
+<section class="slide" id="s2" data-section="problem">
   <div class="content-narrow">
     <div class="badge">01. 문제 정의</div>
     <h2>어떤 문제를 해결하는가?</h2>
@@ -322,7 +341,7 @@
 <!-- ============================== -->
 <!-- SLIDE 3: 5WHYS -->
 <!-- ============================== -->
-<section class="slide" id="s3">
+<section class="slide" id="s3" data-section="problem">
   <div class="content-narrow">
     <div class="badge">01. 문제 정의</div>
     <h2>5Whys — 진짜 문제 찾기</h2>
@@ -366,7 +385,7 @@
 <!-- ============================== -->
 <!-- SLIDE 4: REQUIREMENTS -->
 <!-- ============================== -->
-<section class="slide" id="s4">
+<section class="slide" id="s4" data-section="problem">
   <div class="content-narrow">
     <div class="badge">01. 문제 정의</div>
     <h2>요구사항 및 제약조건</h2>
@@ -408,7 +427,7 @@
 <!-- ============================== -->
 <!-- SLIDE 5: SYSTEM ARCHITECTURE -->
 <!-- ============================== -->
-<section class="slide" id="s5">
+<section class="slide" id="s5" data-section="design">
   <div class="content">
     <div class="badge">02. 시스템 설계</div>
     <h2>전체 아키텍처</h2>
@@ -460,7 +479,7 @@
 <!-- ============================== -->
 <!-- SLIDE 6: STEP 1 & 2 DETAIL -->
 <!-- ============================== -->
-<section class="slide" id="s6">
+<section class="slide" id="s6" data-section="design">
   <div class="content">
     <div class="badge">02. 시스템 설계</div>
     <h2>수집 · Wiki 변환 상세</h2>
@@ -503,7 +522,7 @@
 <!-- ============================== -->
 <!-- SLIDE 7: EXTRACTION & MATCHING DETAIL -->
 <!-- ============================== -->
-<section class="slide" id="s7">
+<section class="slide" id="s7" data-section="design">
   <div class="content">
     <div class="badge">⭐ 02. 시스템 설계 — 핵심</div>
     <h2>역량 추출 → 기업 매칭: Input → Process → Output</h2>
@@ -567,7 +586,7 @@ NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
 <!-- ============================== -->
 <!-- SLIDE 8: TECH STACK -->
 <!-- ============================== -->
-<section class="slide" id="s8">
+<section class="slide" id="s8" data-section="design">
   <div class="content-narrow">
     <div class="badge">02. 시스템 설계</div>
     <h2>기술 스택 선정 근거</h2>
@@ -609,7 +628,7 @@ NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
 <!-- ============================== -->
 <!-- SLIDE 9: ARCHITECTURE EVOLUTION -->
 <!-- ============================== -->
-<section class="slide" id="s9">
+<section class="slide" id="s9" data-section="implement">
   <div class="content">
     <div class="badge">⭐ 03. 구현 과정 — 핵심</div>
     <h2>아키텍처 진화: CrewAI → 경량화</h2>
@@ -665,7 +684,7 @@ NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
 <!-- ============================== -->
 <!-- SLIDE 10: PHASE DETAILS -->
 <!-- ============================== -->
-<section class="slide" id="s10">
+<section class="slide" id="s10" data-section="implement">
   <div class="content-narrow">
     <div class="badge">03. 구현 과정</div>
     <h2>리팩토링 결정 과정</h2>
@@ -717,7 +736,7 @@ a0d16def Update PROJECT_CHANGELOG.md
 <!-- ============================== -->
 <!-- SLIDE 11: RESULTS - DATA -->
 <!-- ============================== -->
-<section class="slide" id="s11">
+<section class="slide" id="s11" data-section="result">
   <div class="content-narrow center-text">
     <div class="badge">04. 구현 결과</div>
     <h2>수집 데이터 현황</h2>
@@ -748,7 +767,7 @@ a0d16def Update PROJECT_CHANGELOG.md
 <!-- ============================== -->
 <!-- SLIDE 12: FACET WIKI + GRAPH -->
 <!-- ============================== -->
-<section class="slide" id="s12">
+<section class="slide" id="s12" data-section="result">
   <div class="content">
     <div class="badge">04. 구현 결과</div>
     <h2>Facet Wiki 구조</h2>
@@ -792,7 +811,7 @@ a0d16def Update PROJECT_CHANGELOG.md
 <!-- ============================== -->
 <!-- SLIDE 13: MATCHING DEMO -->
 <!-- ============================== -->
-<section class="slide" id="s13">
+<section class="slide" id="s13" data-section="result">
   <div class="content-narrow center-text">
     <div class="badge">04. 구현 결과</div>
     <h2>매칭 엔진 데모</h2>
@@ -832,7 +851,7 @@ a0d16def Update PROJECT_CHANGELOG.md
 <!-- ============================== -->
 <!-- SLIDE 14: VERIFICATION -->
 <!-- ============================== -->
-<section class="slide" id="s14">
+<section class="slide" id="s14" data-section="verify">
   <div class="content-narrow">
     <div class="badge">05. 실험 및 검증</div>
     <h2>성능 측정 결과</h2>
@@ -903,7 +922,7 @@ a0d16def Update PROJECT_CHANGELOG.md
 <!-- ============================== -->
 <!-- SLIDE 15: COMPARISON -->
 <!-- ============================== -->
-<section class="slide" id="s15">
+<section class="slide" id="s15" data-section="verify">
   <div class="content-narrow">
     <div class="badge">05. 실험 및 검증</div>
     <h2>개선 전후 비교</h2>
@@ -940,7 +959,7 @@ a0d16def Update PROJECT_CHANGELOG.md
 <!-- ============================== -->
 <!-- SLIDE 16: RISK -->
 <!-- ============================== -->
-<section class="slide" id="s16">
+<section class="slide" id="s16" data-section="risk">
   <div class="content-narrow">
     <div class="badge">07. 리스크 관리</div>
     <h2>식별된 리스크 및 대응</h2>
@@ -985,7 +1004,7 @@ a0d16def Update PROJECT_CHANGELOG.md
 <!-- ============================== -->
 <!-- SLIDE 17: CONTRIBUTION -->
 <!-- ============================== -->
-<section class="slide" id="s17">
+<section class="slide" id="s17" data-section="contribute">
   <div class="content-narrow">
     <div class="badge">08. 개인 기여도</div>
     <h2>팀원별 역할 및 기여</h2>
@@ -1057,7 +1076,7 @@ a0d16def Update PROJECT_CHANGELOG.md
 <!-- ============================== -->
 <!-- SLIDE 18: FUTURE -->
 <!-- ============================== -->
-<section class="slide" id="s18">
+<section class="slide" id="s18" data-section="future">
   <div class="content-narrow">
     <div class="badge">09. 향후 계획</div>
     <h2>확장성 및 로드맵</h2>
@@ -1159,6 +1178,16 @@ document.addEventListener('keydown', (e) => {
     if (prev) slides[prev.dataset.index].scrollIntoView({ behavior: 'smooth' });
   }
 });
+
+// Slide entrance animation — reveal each slide as it enters viewport
+const slideObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+slides.forEach(s => slideObserver.observe(s));
 
 // ===== OBSIDIAN-STYLE FORCE-DIRECTED GRAPH =====
 (function() {
