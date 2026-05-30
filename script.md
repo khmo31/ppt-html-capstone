@@ -76,13 +76,13 @@ Step 2는 wiki_generator.py가 이 데이터를 NCS 24개 분류, 17개 지역, 
 
 INPUT으로 사용자가 "의공학 전공, 의료기기 인턴 6개월, 파이썬 데이터분석 프로젝트 경험"이라고 입력합니다.
 
-PROCESS는 두 단계를 거칩니다. 첫째, **LLM이 프롬프트에 따라 키워드를 추출**합니다. 실제 코드 레벨의 프롬프트를 보여드리면, NCS 분류 체계에 맞춰 ncs, skills, regions, education을 최대 15개 키워드로 추출하도록 되어 있습니다. 둘째, 추출된 키워드는 **OntologyCheckTool**을 통해 표준 온톨로지로 정규화됩니다. _normalize_keyword()로 불필요한 문자를 제거하고, Ontology_Map.json과 매칭하여 표준화한 뒤, 중복을 제거합니다.
+PROCESS는 두 단계를 거칩니다. 첫째, **LLM이 프롬프트에 따라 키워드를 추출**합니다. 실제 코드 레벨의 프롬프트를 보여드리면, NCS 분류 체계에 맞춰 ncs, skills, regions, education을 최대 15개 키워드로 추출하도록 되어 있습니다. 둘째, 추출된 키워드는 **WikiReadOnlyTool**을 통해 표준 Wiki 키워드로 정규화됩니다. _normalize_keyword()로 불필요한 문자를 제거하고, Facet_Index.json과 매칭하여 표준화한 뒤, 중복을 제거합니다.
 
 OUTPUT으로 이렇게 구조화된 키워드 셋이 나옵니다.
 
 다음 **2단계, 기업 매칭**입니다.
 
-저희는 가중치 점수화 방식을 사용합니다. 실제 코드 상수값을 보여드리면, **PROFILE_TERM_WEIGHT는 3.0**, **SUPPLEMENTAL_TERM_WEIGHT는 1.0**입니다. 즉, 사용자가 직접 입력한 키워드에 3배의 가중치를 줍니다.
+저희는 가중치 점수화 방식을 사용합니다. 실제 코드 상수값을 보여드리면, **CORE_PROFILE_TERM_WEIGHT는 6.0** (핵심 의도 6배), **PROFILE_TERM_WEIGHT는 3.0** (사용자 직접 입력 3배), **SUPPLEMENTAL_TERM_WEIGHT는 1.0** (보조 추출 1배)입니다. 즉, LLM이 core/support/follow_up 3단계로 키워드를 분류하고 각각 6배, 3배, 1배의 가중치를 적용합니다.
 
 점수화는 4단계로 이루어집니다.
 1. _build_weighted_scoring_terms()로 가중치 적용

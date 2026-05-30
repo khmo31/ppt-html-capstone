@@ -528,7 +528,7 @@
     <h2>역량 추출 → 기업 매칭: Input → Process → Output</h2>
     <div class="split" style="margin-top:12px;">
       <div>
-        <h3>1️⃣ 역량 추출 (LLM → Ontology)</h3>
+        <h3>1️⃣ 역량 추출 (LLM → Wiki)</h3>
         <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
           <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">INPUT: 사용자 비정형 경험</div>
           <code style="font-size:0.75rem;">"의공학 전공, 의료기기 인턴 6개월,<br>파이썬 데이터분석 프로젝트 경험"</code>
@@ -544,13 +544,13 @@ NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
 - skills: [관련 기술/역량]
 - regions: [희망 지역]
 - education: [필요 학력]
-키워드는 최대 15개, Ontology_Map.json의
-표준 키워드를 우선 사용하세요.
+키워드는 최대 15개, Facet_Index.json의
+표준 Wiki 키워드를 우선 사용하세요.
 """</code></pre>
         </div>
         <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
-          <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">OntologyCheckTool — 표준 키워드 정규화</div>
-          <code style="font-size:0.75rem;">LLM 출력 ("의료기기" → "보건의료")<br>  ↓<br>_normalize_keyword() — 불필요 문자 제거<br>  ↓<br>Ontology_Map.json 매칭 — 표준 온톨로지 매핑<br>  ↓<br>_deduplicate_preserve_order() — 중복 제거</code>
+          <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">WikiReadOnlyTool — 표준 Wiki 키워드 정규화</div>
+          <code style="font-size:0.75rem;">LLM 출력 ("의료기기" → "보건의료")<br>  ↓<br>_normalize_keyword() — 불필요 문자 제거<br>  ↓<br>Facet_Index.json 매칭 — 표준 Wiki 키워드 매핑<br>  ↓<br>_deduplicate_preserve_order() — 중복 제거</code>
         </div>
         <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px;">
           <div style="font-weight:600; font-size:0.85rem; color:#059669; margin-bottom:6px;">OUTPUT: 구조화된 키워드 셋</div>
@@ -567,7 +567,7 @@ NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
         <h3>2️⃣ 기업 매칭 (가중치 점수화)</h3>
         <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
           <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">가중치 정책 (실제 코드)</div>
-          <code style="font-size:0.75rem;">PROFILE_TERM_WEIGHT = 3.0    # 사용자 직접 입력<br>SUPPLEMENTAL_TERM_WEIGHT = 1.0 # LLM 보조 추출<br>MATCH_RATE_THRESHOLD = 50     # 최소 매칭 기준</code>
+          <code style="font-size:0.75rem;">CORE_PROFILE_TERM_WEIGHT = 6.0  # 핵심 의도 키워드<br>PROFILE_TERM_WEIGHT = 3.0    # 사용자 직접 입력<br>SUPPLEMENTAL_TERM_WEIGHT = 1.0 # LLM 보조 추출<br>MATCH_RATE_THRESHOLD = 50     # 최소 매칭 기준</code>
         </div>
         <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
           <div style="font-weight:600; font-size:0.85rem; color:#4f46e5; margin-bottom:6px;">점수화 알고리즘</div>
@@ -741,7 +741,7 @@ a0d16def Update PROJECT_CHANGELOG.md
     <div class="badge">04. 구현 결과</div>
     <h2>수집 데이터 현황</h2>
     <div class="metrics" style="margin-top:24px;">
-      <div class="metric"><div class="metric-num">200+</div><div class="metric-label">수집된 채용공고</div></div>
+      <div class="metric"><div class="metric-num">444+</div><div class="metric-label">수집된 채용공고</div></div>
       <div class="metric"><div class="metric-num">150+</div><div class="metric-label">기관 프로필</div></div>
       <div class="metric"><div class="metric-num">400+</div><div class="metric-label">역량/기술 정의</div></div>
     </div>
@@ -828,7 +828,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       <div style="display:flex; align-items:center; justify-content:center; margin:16px 0; gap:8px;">
         <span class="tag tag-blue">OpenCode Go API</span>
         <span style="color:#cbd5e1;">→</span>
-        <span class="tag tag-purple">온톨로지 매칭</span>
+        <span class="tag tag-purple">Facet Wiki 매칭</span>
         <span style="color:#cbd5e1;">→</span>
         <span class="tag tag-green">Top-5 추천</span>
       </div>
