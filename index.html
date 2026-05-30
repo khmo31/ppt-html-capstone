@@ -798,17 +798,14 @@ a0d16def Update PROJECT_CHANGELOG.md
         </div>
       </div>
       <div>
-        <h3>지식 그래프 (Obsidian 스타일)</h3>
+        <h3>실제 Obsidian 그래프 뷰</h3>
         <div class="graph-wrap">
-          <canvas id="obsidianGraph" width="420" height="420"></canvas>
-          <div id="graphTooltip" style="position:absolute; display:none; background:#ffffff; border:1px solid rgba(79,70,229,0.2); border-radius:8px; padding:6px 12px; font-size:0.75rem; color:#1e293b; pointer-events:none; white-space:nowrap; z-index:10; box-shadow:0 4px 12px rgba(0,0,0,0.1);"></div>
+          <video id="obsidianGraphVideo" width="420" height="420" autoplay loop muted playsinline style="width:100%;height:auto;aspect-ratio:1/1;border-radius:12px;background:#f8fafc;border:1px solid rgba(0,0,0,0.06);object-fit:cover;">
+            <source src="assets/timelapse_10x.mp4" type="video/mp4">
+          </video>
         </div>
-        <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#4f46e5;display:inline-block;"></span> 공고</span>
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#059669;display:inline-block;"></span> NCS 분류</span>
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#a16207;display:inline-block;"></span> 기관</span>
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#db2777;display:inline-block;"></span> 역량</span>
-          <span style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:#64748b;"><span style="width:10px;height:10px;border-radius:50%;background:#ea580c;display:inline-block;"></span> 지역/기타</span>
+        <div style="margin-top:8px; font-size:0.75rem; color:#94a3b8; text-align:center;">
+          ⏱️ 98초 → 10초 타임랩스 · Obsidian Graph View 녹화
         </div>
       </div>
     </div>
@@ -1197,173 +1194,6 @@ const slideObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 slides.forEach(s => slideObserver.observe(s));
-
-// ===== OBSIDIAN-STYLE FORCE-DIRECTED GRAPH =====
-(function() {
-  const canvas = document.getElementById('obsidianGraph');
-  if (!canvas) return;
-  const tooltip = document.getElementById('graphTooltip');
-  const ctx = canvas.getContext('2d');
-  canvas.width = 420; canvas.height = 420;
-  const W = 420, H = 420;
-  const center = {x:W/2, y:H/2};
-
-  const nodes = [
-    { id:'u1', label:'👤 사용자\n경험/흥미', group:'user', r:20 },
-    { id:'p1', label:'📄 충남대병원\n의료기기연구', group:'post', r:16 },
-    { id:'p2', label:'📄 분당서울대\n데이터분석', group:'post', r:16 },
-    { id:'p3', label:'📄 부산대병원\n의생명연구', group:'post', r:16 },
-    { id:'n1', label:'🧑‍💼 NCS\n보건의료', group:'ncs', r:14 },
-    { id:'n2', label:'🧑‍💼 NCS\n정보통신', group:'ncs', r:14 },
-    { id:'n3', label:'🧑‍💼 NCS\n연구', group:'ncs', r:14 },
-    { id:'r1', label:'📍 대전', group:'region', r:11 },
-    { id:'r2', label:'📍 경기', group:'region', r:11 },
-    { id:'r3', label:'📍 부산', group:'region', r:11 },
-    { id:'s1', label:'🎓 석사↑', group:'skill', r:11 },
-    { id:'s2', label:'💡 의료기기\n개발', group:'skill', r:13 },
-    { id:'s3', label:'💡 데이터\n분석', group:'skill', r:13 },
-    { id:'c1', label:'🏥 충남대\n병원', group:'company', r:15 },
-    { id:'c2', label:'🏥 분당서울\n대병원', group:'company', r:15 },
-    { id:'c3', label:'🏥 부산대\n병원', group:'company', r:15 },
-  ];
-
-  const edges = [
-    {s:'u1',t:'s2'},{s:'u1',t:'s3'},
-    {s:'p1',t:'n1'},{s:'p1',t:'r1'},{s:'p1',t:'s1'},{s:'p1',t:'s2'},{s:'p1',t:'c1'},
-    {s:'p2',t:'n2'},{s:'p2',t:'r2'},{s:'p2',t:'s1'},{s:'p2',t:'s3'},{s:'p2',t:'c2'},
-    {s:'p3',t:'n3'},{s:'p3',t:'r3'},{s:'p3',t:'s1'},{s:'p3',t:'s2'},{s:'p3',t:'c3'},
-    {s:'n1',t:'s2'},{s:'n2',t:'s3'},{s:'n3',t:'s2'},
-    {s:'c1',t:'r1'},{s:'c2',t:'r2'},{s:'c3',t:'r3'},
-  ];
-
-  const colors = { user:'#4f46e5', post:'#4f46e5', ncs:'#059669', region:'#ea580c', skill:'#db2777', company:'#a16207' };
-
-  let dragNode = null;
-  function initPositions() {
-    nodes.forEach((n,i) => {
-      const angle = (i/nodes.length)*Math.PI*2;
-      const rad = 80 + Math.random()*60;
-      n.x = center.x + Math.cos(angle)*rad;
-      n.y = center.y + Math.sin(angle)*rad;
-      n.vx = 0; n.vy = 0;
-    });
-  }
-  initPositions();
-
-  function simulate() {
-    const repel = 6000, attract = 0.005, damping = 0.85;
-    nodes.forEach(n => { n.fx = 0; n.fy = 0; });
-    for(let i=0;i<nodes.length;i++) {
-      for(let j=i+1;j<nodes.length;j++) {
-        let dx = nodes[j].x - nodes[i].x, dy = nodes[j].y - nodes[i].y;
-        let dist = Math.sqrt(dx*dx+dy*dy) + 1;
-        let force = repel / (dist*dist);
-        let fx = (dx/dist)*force, fy = (dy/dist)*force;
-        nodes[i].fx -= fx; nodes[i].fy -= fy;
-        nodes[j].fx += fx; nodes[j].fy += fy;
-      }
-    }
-    edges.forEach(e => {
-      let a = nodes.find(n=>n.id===e.s), b = nodes.find(n=>n.id===e.t);
-      if(!a||!b) return;
-      let dx = b.x - a.x, dy = b.y - a.y;
-      let dist = Math.sqrt(dx*dx+dy*dy) + 1;
-      let force = (dist - 120) * attract;
-      let fx = (dx/dist)*force, fy = (dy/dist)*force;
-      a.fx += fx; a.fy += fy; b.fx -= fx; b.fy -= fy;
-    });
-    nodes.forEach(n => {
-      n.fx += (center.x - n.x) * 0.001; n.fy += (center.y - n.y) * 0.001;
-    });
-    nodes.forEach(n => {
-      if(n === dragNode) return;
-      n.vx = (n.vx + n.fx) * damping; n.vy = (n.vy + n.fy) * damping;
-      n.x += n.vx; n.y += n.vy;
-      n.x = Math.max(30, Math.min(W-30, n.x)); n.y = Math.max(30, Math.min(H-30, n.y));
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0,0,W,H);
-    // Background subtle grid
-    ctx.strokeStyle = 'rgba(79,70,229,0.03)'; ctx.lineWidth = 1;
-    for(let i=0;i<W;i+=30){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,H);ctx.stroke();}
-    for(let i=0;i<H;i+=30){ctx.beginPath();ctx.moveTo(0,i);ctx.lineTo(W,i);ctx.stroke();}
-    // Edges
-    edges.forEach(e => {
-      let a = nodes.find(n=>n.id===e.s), b = nodes.find(n=>n.id===e.t);
-      if(!a||!b) return;
-      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
-      ctx.strokeStyle = 'rgba(79,70,229,0.12)'; ctx.lineWidth = 1; ctx.stroke();
-    });
-    // User edges highlighted
-    edges.filter(e=>e.s==='u1').forEach(e => {
-      let b = nodes.find(n=>n.id===e.t);
-      if(!b) return;
-      ctx.beginPath(); ctx.moveTo(nodes[0].x,nodes[0].y); ctx.lineTo(b.x,b.y);
-      ctx.strokeStyle = 'rgba(79,70,229,0.25)'; ctx.lineWidth = 1.5; ctx.stroke();
-    });
-    // Nodes
-    nodes.forEach(n => {
-      const col = colors[n.group] || '#666';
-      const grad = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*2);
-      grad.addColorStop(0,col+'20'); grad.addColorStop(1,'transparent');
-      ctx.beginPath(); ctx.arc(n.x,n.y,n.r*2,0,Math.PI*2);
-      ctx.fillStyle = grad; ctx.fill();
-      ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle = col+'15'; ctx.strokeStyle = col;
-      ctx.lineWidth = n===dragNode?2.5:1.5; ctx.fill(); ctx.stroke();
-      const lines = n.label.split('\n'); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      lines.forEach((line,i) => {
-        ctx.fillStyle = n===dragNode?'#1e293b':'#475569';
-        ctx.font = i===0?'500 9px Noto Sans KR, sans-serif':'400 8px Noto Sans KR, sans-serif';
-        ctx.fillText(line, n.x, n.y + (i - (lines.length-1)/2)*13);
-      });
-    });
-  }
-
-  function loop(){ simulate(); draw(); requestAnimationFrame(loop); }
-  loop();
-
-  function getPos(e) {
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width, scaleY = canvas.height / rect.height;
-    const cx = e.touches ? e.touches[0].clientX : e.clientX;
-    const cy = e.touches ? e.touches[0].clientY : e.clientY;
-    return { x: (cx - rect.left) * scaleX, y: (cy - rect.top) * scaleY };
-  }
-  function onDown(e) {
-    e.preventDefault(); const pos = getPos(e); let hit = null;
-    for(let i=nodes.length-1;i>=0;i--) {
-      const n = nodes[i], dx = pos.x-n.x, dy = pos.y-n.y;
-      if(dx*dx+dy*dy < (n.r+10)*(n.r+10)) { hit = n; break; }
-    }
-    if(hit) { dragNode = hit; canvas.style.cursor = 'grabbing'; }
-  }
-  function onMove(e) {
-    e.preventDefault(); const pos = getPos(e);
-    if(dragNode) { dragNode.x = pos.x; dragNode.y = pos.y; dragNode.vx = 0; dragNode.vy = 0; }
-    let hover = null;
-    for(let i=nodes.length-1;i>=0;i--) {
-      const n = nodes[i], dx = pos.x-n.x, dy = pos.y-n.y;
-      if(dx*dx+dy*dy < (n.r+15)*(n.r+15)) { hover = n; break; }
-    }
-    if(hover) {
-      tooltip.style.display = 'block';
-      const rect = canvas.getBoundingClientRect(), sx = rect.width/canvas.width, sy = rect.height/canvas.height;
-      tooltip.style.left = (hover.x*sx+15)+'px'; tooltip.style.top = (hover.y*sy-10)+'px';
-      tooltip.textContent = hover.label.replace('\n',' - ');
-    } else { tooltip.style.display = 'none'; }
-  }
-  function onUp(e) { e.preventDefault(); dragNode = null; canvas.style.cursor = 'grab'; }
-  canvas.addEventListener('mousedown', onDown);
-  canvas.addEventListener('mousemove', onMove);
-  canvas.addEventListener('mouseup', onUp);
-  canvas.addEventListener('mouseleave', onUp);
-  canvas.addEventListener('touchstart', onDown, {passive:false});
-  canvas.addEventListener('touchmove', onMove, {passive:false});
-  canvas.addEventListener('touchend', onUp);
-})();
 </script>
 
 </body>
