@@ -9,10 +9,10 @@
   @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
 
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
+  html { scroll-behavior:smooth; scroll-snap-type:y mandatory; }
   body {
     font-family:'Noto Sans KR', sans-serif;
-    background:#e2e8f0;
+    background:#f8fafc;
     color:#1e293b;
     overflow-x:hidden;
   }
@@ -50,14 +50,11 @@
 
   /* Slide Common */
   .slide {
-    display:flex; flex-direction:column; justify-content:center;
-    padding:36px 48px; position:relative;
-    width:min(calc(100vw - 80px), 1100px); margin:32px auto;
-    border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.08);
-    min-height:calc(min(100vw - 80px, 1100px) / 1.414);
+    width:100%; min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+    padding:60px 80px; position:relative; overflow:hidden; scroll-snap-align:start;
   }
   .slide::before {
-    content:''; position:absolute; inset:0; border-radius:12px;
+    content:''; position:absolute; inset:0;
     background:
       radial-gradient(ellipse at 20% 50%, rgba(79,70,229,0.03) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 50%, rgba(124,58,237,0.02) 0%, transparent 50%);
@@ -249,7 +246,7 @@
 
   /* Responsive */
   @media (max-width:768px) {
-    .slide { padding:28px 20px; margin:16px auto; width:calc(100vw - 32px); min-height:calc((100vw - 32px) / 1.414); }
+    .slide { padding:40px 24px; }
     .split { flex-direction:column; }
     .card-grid { grid-template-columns:1fr; }
     .grid-9 { grid-template-columns:repeat(3,1fr); font-size:0.7rem; }
@@ -292,7 +289,7 @@
       <div style="margin-top:20px; font-size:0.85rem; color:#94a3b8;">12조 · 캡스톤프로젝트 · 2026-1</div>
     </div>
   </div>
-  <div class="slide-num">01 / 18</div>
+  <div class="slide-num">01 / 19</div>
   <div class="scroll-hint">↓ 스크롤</div>
 </section>
 
@@ -338,7 +335,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">02 / 18</div>
+  <div class="slide-num">02 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -382,7 +379,7 @@
       <div class="text">"자신의 진로를 명확히 탐색하지 못한 사용자가 본인의 경험 및 흥미를 비정형적으로 작성하면,<br>그걸 바탕으로 맞춤형 채용 공고를 추천해주는 시스템을 개발하자"</div>
     </div>
   </div>
-  <div class="slide-num">03 / 18</div>
+  <div class="slide-num">03 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -424,7 +421,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">04 / 18</div>
+  <div class="slide-num">04 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -476,7 +473,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">05 / 18</div>
+  <div class="slide-num">05 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -519,7 +516,7 @@
       </div>
     </div>
   </div>
-  <div class="slide-num">06 / 18</div>
+  <div class="slide-num">06 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -528,8 +525,8 @@
 <section class="slide" id="s7" data-section="design">
   <div class="content">
     <div class="badge">⭐ 02. 시스템 설계 — 핵심</div>
-    <h2>역량 추출 → 기업 매칭: Input → Process → Output</h2>
-    <div class="split" style="margin-top:12px;">
+    <h2>역량 추출: Input → Process → Output</h2>
+    <div class="content" style="margin-top:12px;">
       <div>
         <h3>1️⃣ 역량 추출 (LLM → Wiki)</h3>
         <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
@@ -566,6 +563,17 @@ NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
 }</code>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="slide-num">07 / 19</div>
+</section><!-- ============================== -->
+<!-- SLIDE 7b: MATCHING DETAIL -->
+<!-- ============================== -->
+<section class="slide" id="s7b" data-section="design">
+  <div class="content">
+    <div class="badge">⭐ 02. 시스템 설계 — 핵심</div>
+    <h2>기업 매칭: 가중치 점수화 알고리즘</h2>
+    <div class="split" style="margin-top:12px;">
       <div>
         <h3>2️⃣ 기업 매칭 (가중치 점수화)</h3>
         <div style="background:#f1f5f9; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:14px; margin-bottom:10px;">
@@ -588,11 +596,11 @@ NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
           </div>
         </div>
       </div>
+    
     </div>
   </div>
-  <div class="slide-num">07 / 18</div>
+  <div class="slide-num">08 / 19</div>
 </section>
-
 <!-- ============================== -->
 <!-- SLIDE 8: TECH STACK -->
 <!-- ============================== -->
@@ -632,7 +640,7 @@ NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
       </div>
     </div>
   </div>
-  <div class="slide-num">08 / 18</div>
+  <div class="slide-num">09 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -689,7 +697,7 @@ NCS 분류 체계에 맞춰 다음 형식으로 추출하세요:
       <span class="tag tag-blue">60% Token 절감</span>
     </div>
   </div>
-  <div class="slide-num">09 / 18</div>
+  <div class="slide-num">10 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -741,7 +749,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </code>
     </div>
   </div>
-  <div class="slide-num">10 / 18</div>
+  <div class="slide-num">11 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -772,7 +780,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">11 / 18</div>
+  <div class="slide-num">12 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -813,7 +821,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">12 / 18</div>
+  <div class="slide-num">13 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -853,7 +861,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">13 / 18</div>
+  <div class="slide-num">14 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -924,7 +932,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">14 / 18</div>
+  <div class="slide-num">15 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -961,7 +969,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">15 / 18</div>
+  <div class="slide-num">16 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -1006,7 +1014,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">16 / 18</div>
+  <div class="slide-num">17 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -1079,7 +1087,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">17 / 18</div>
+  <div class="slide-num">18 / 19</div>
 </section>
 
 <!-- ============================== -->
@@ -1130,7 +1138,7 @@ a0d16def Update PROJECT_CHANGELOG.md
       </div>
     </div>
   </div>
-  <div class="slide-num">18 / 18</div>
+  <div class="slide-num">19 / 19</div>
 </section>
 
 <!-- Navigation dots -->
